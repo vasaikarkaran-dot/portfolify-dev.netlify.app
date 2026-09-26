@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolify • by Karan Vasaikar</title>
+  <title>Portfolify • Engineered by Karan Vasaikar</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 </head>
 <body class="theme-liquid-light">
 
-  <!-- Ambient Liquid Glowing Mesh Background -->
+  <!-- Ambient Glowing Mesh Background -->
   <div class="liquid-bg-wrap">
     <div class="liquid-orb orb-1"></div>
     <div class="liquid-orb orb-2"></div>
@@ -25,7 +25,7 @@
 
       <div class="welcome-top-meta">
         <span class="brand-pill">⚡ PORTFOLIFY</span>
-        <span class="version-pill">v3.0 PRO</span>
+        <span class="version-pill">STUDENT EDITION</span>
       </div>
 
       <h1 class="welcome-headline">
@@ -40,27 +40,27 @@
 
       <div class="student-inspire-box">
         <p class="inspire-quote">
-          "Every late-night bug you fixed, every hackathon prototype you built, and every line of code deserves more than a boring plain resume."
+          "Every college project, hackathon prototype, and line of code deserves a stunning portfolio instead of a boring plain resume."
         </p>
         <p class="inspire-subtext">
-          Built for passionate engineering and computer science students. Turn your academic journey, coding stats, live projects, and verified certificates into a high-impact developer website.
+          Built specially for engineering students. Turn your academic journey, coding stats, projects, and certificates into a live website in 2 minutes!
         </p>
         
         <div class="inspire-highlights">
-          <div class="highlight-chip"><span>🎯</span> 0% Fluff • 100% Proof</div>
-          <div class="highlight-chip"><span>📁</span> Media & Screenshots</div>
-          <div class="highlight-chip"><span>📜</span> Verified Certificates</div>
+          <div class="highlight-chip"><span>🎯</span> 1-Click Templates</div>
+          <div class="highlight-chip"><span>📁</span> Project Media</div>
+          <div class="highlight-chip"><span>📜</span> Verified Proofs</div>
         </div>
       </div>
       
       <div class="welcome-features">
-        <span>▲ Elite Developer Themes</span>
+        <span>▲ Elite Themes</span>
         <span>📱 Mobile Responsive</span>
-        <span>📄 Instant PDF & HTML Export</span>
+        <span>📄 PDF & HTML Export</span>
       </div>
 
       <button type="button" id="startStudioBtn" class="welcome-btn">
-        <span>Launch Portfolify Now</span>
+        <span>Launch Portfolify Studio</span>
         <span class="btn-arrow">→</span>
       </button>
     </div>
@@ -74,20 +74,23 @@
 
   <div class="app-layout">
     
-    <!-- ================= LEFT PANEL: FORM EDITOR ================= -->
+    <!-- ================= LEFT PANEL: EDITOR ================= -->
     <aside class="editor-panel" id="editorPanel">
       <div class="panel-header">
         <div>
-          <h2>Portfolify</h2>
-          <p class="panel-subtitle">By Karan Vasaikar • Student Portfolio Generator</p>
+          <h2>Portfolify Studio</h2>
+          <p class="panel-subtitle">By Karan Vasaikar • Student Portfolio Builder</p>
         </div>
-        <button type="button" id="demoBtn" class="glass-pill-btn">⚡ Reset Sample</button>
+        <div class="header-preset-cluster">
+          <button type="button" id="fresherPresetBtn" class="glass-pill-btn" title="Load 1st/2nd Year Sample">🌱 Fresher</button>
+          <button type="button" id="seniorPresetBtn" class="glass-pill-btn" title="Load 3rd/4th Year Sample">🚀 Senior</button>
+        </div>
       </div>
 
       <!-- Completeness Meter -->
       <div class="meter-box">
         <div class="meter-meta">
-          <span>Portfolio Strength</span>
+          <span>Portfolio Readiness Index</span>
           <span id="meterPercent">85%</span>
         </div>
         <div class="meter-track">
@@ -102,47 +105,46 @@
           <div class="form-group half">
             <label>Developer Theme Preset</label>
             <select id="themeSelect">
-              <option value="theme-liquid-light">💎 Liquid Pearl Light (Default)</option>
+              <option value="theme-liquid-light">💎 Liquid Pearl Light</option>
               <option value="theme-vercel">▲ Vercel Obsidian Dark</option>
               <option value="theme-supabase">⚡ Supabase Emerald</option>
               <option value="theme-linear">🔮 Linear Violet</option>
               <option value="theme-cyber">🌐 Cyberpunk Neon</option>
-              <option value="theme-dracula">🧛 Dracula Pro</option>
             </select>
           </div>
           <div class="form-group half">
-            <label>Profile Picture</label>
+            <label>Profile Avatar</label>
             <input type="file" id="photoInput" accept="image/*">
           </div>
         </div>
 
         <!-- Section 1: Hero & Identity -->
-        <div class="section-badge">📄 Page 1: Hero, Stats & Academics</div>
+        <div class="section-badge">📄 Personal Identity & Stats</div>
 
         <div class="form-group">
-          <label>Full Name</label>
+          <label>Full Legal Name</label>
           <input type="text" id="nameInput" value="Jordan Lee" placeholder="Enter your full name" data-capitalize="words">
         </div>
 
         <div class="form-group">
-          <label>Headline / Role</label>
-          <input type="text" id="roleInput" value="Computer Science Student & Full-Stack Developer" placeholder="e.g. Computer Science Student & Frontend Developer">
+          <label>Professional Headline / Role</label>
+          <input type="text" id="roleInput" value="Computer Science Student & Full-Stack Developer" placeholder="e.g. CS Student & Developer">
         </div>
 
         <div class="form-group">
-          <label>About Me (Bio)</label>
-          <textarea id="bioInput" rows="3" placeholder="Write a brief overview...">Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.</textarea>
+          <label>Executive Summary (Bio)</label>
+          <textarea id="bioInput" rows="3" placeholder="Write a short overview...">Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.</textarea>
         </div>
 
         <!-- Coding Stats -->
         <div class="form-row">
           <div class="form-group third">
-            <label>Completed Projects</label>
+            <label>Projects Done</label>
             <input type="text" id="statProjectsInput" value="12+" placeholder="e.g. 5+">
           </div>
           <div class="form-group third">
             <label>GitHub Commits</label>
-            <input type="text" id="statCommitsInput" value="380+" placeholder="e.g. 250+">
+            <input type="text" id="statCommitsInput" value="380+" placeholder="e.g. 150+">
           </div>
           <div class="form-group third">
             <label>Problems Solved</label>
@@ -152,28 +154,28 @@
 
         <div class="form-row">
           <div class="form-group half">
-            <label>Email Address</label>
+            <label>Primary Email</label>
             <input type="email" id="emailInput" value="jordan.lee@university.edu" placeholder="name@domain.com">
           </div>
           <div class="form-group half">
-            <label>Phone / WhatsApp</label>
+            <label>Direct Telephone / WhatsApp</label>
             <input type="tel" id="phoneInput" value="+91 98765 43210" placeholder="+91 00000 00000">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group half">
-            <label>LinkedIn URL</label>
+            <label>LinkedIn Profile URL</label>
             <input type="url" id="linkedinInput" value="https://linkedin.com" placeholder="https://linkedin.com/in/username">
           </div>
           <div class="form-group half">
-            <label>GitHub URL</label>
+            <label>GitHub Profile URL</label>
             <input type="url" id="githubInput" value="https://github.com" placeholder="https://github.com/username">
           </div>
         </div>
 
         <div class="form-group">
-          <label>Technical Stack (Comma-separated)</label>
+          <label>Core Technical Skills (Comma-separated)</label>
           <input type="text" id="skillsInput" value="Java, Python, C++, HTML5, CSS3, JavaScript, TypeScript, Git, SQL, Docker" placeholder="e.g. Java, Python..." data-capitalize="words">
         </div>
 
@@ -184,13 +186,13 @@
             <input type="text" id="eduDegreeInput" value="B.Tech in Computer Engineering" placeholder="e.g. B.Tech Computer Engineering" data-capitalize="words">
           </div>
           <div class="form-group half">
-            <label>Passing Year / Grade</label>
+            <label>Academic Standing / Batch</label>
             <input type="text" id="eduYearInput" value="Class of 2026 | CGPA: 8.8" placeholder="e.g. Class of 2026">
           </div>
         </div>
 
         <div class="form-group">
-          <label>College / University</label>
+          <label>College / University Institution</label>
           <input type="text" id="eduCollegeInput" value="Institute of Technology & Engineering" placeholder="e.g. Department of Engineering" data-capitalize="words">
         </div>
 
@@ -198,7 +200,7 @@
         <div class="form-row">
           <div class="form-group half">
             <label>Role / Position</label>
-            <input type="text" id="expRoleInput" value="Software Engineering Intern" placeholder="e.g. Web Development Intern" data-capitalize="words">
+            <input type="text" id="expRoleInput" value="Software Engineering Intern" placeholder="e.g. Web Intern" data-capitalize="words">
           </div>
           <div class="form-group half">
             <label>Organization / Club</label>
@@ -212,46 +214,46 @@
         </div>
 
         <!-- Section 2: Projects -->
-        <div class="section-badge">📁 Page 2: Projects (With Screenshots & Links)</div>
+        <div class="section-badge">📁 Projects & Codebase Deliverables</div>
 
         <div id="projectsFormList"></div>
 
-        <button type="button" id="addProjectBtn" class="add-proj-btn">+ Add Another Project</button>
+        <button type="button" id="addProjectBtn" class="add-proj-btn">+ Register Another Project</button>
 
         <!-- Section 3: Verified Certification -->
-        <div class="section-badge">📜 Certification & Document Proof</div>
+        <div class="section-badge">📜 Verified Certification & Proof</div>
 
         <div class="cert-input-card">
           <div class="form-group">
             <label>Certification / Award Title</label>
-            <input type="text" id="certInput" value="Full-Stack Web Development Certified" placeholder="e.g. Full-Stack Java Development Certified" data-capitalize="words">
+            <input type="text" id="certInput" value="Full-Stack Web Development Certified" placeholder="e.g. Cloud Practitioner Certified" data-capitalize="words">
           </div>
           <div class="form-group">
-            <label>Issuing Organization</label>
-            <input type="text" id="certIssuerInput" value="Meta / Coursera" placeholder="e.g. Oracle / HackerRank" data-capitalize="words">
+            <label>Issuing Institution</label>
+            <input type="text" id="certIssuerInput" value="Meta / Coursera" placeholder="e.g. AWS / Meta" data-capitalize="words">
           </div>
           <div class="form-row">
             <div class="form-group half">
-              <label>Certificate Image / Document</label>
+              <label>Certificate Document Proof</label>
               <input type="file" id="certFileInput" accept="image/*,.pdf">
             </div>
             <div class="form-group half">
-              <label>Credential Verification URL</label>
-              <input type="url" id="certUrlInput" value="https://coursera.org/verify" placeholder="https://coursera.org/verify/xyz">
+              <label>Official Verification URL</label>
+              <input type="url" id="certUrlInput" value="https://coursera.org/verify" placeholder="https://verify.com">
             </div>
           </div>
         </div>
 
         <!-- Export Actions -->
         <div class="action-footer">
-          <button type="button" onclick="window.print()" class="btn btn-secondary">📄 Export Multi-Page PDF</button>
-          <button type="button" id="downloadHtmlBtn" class="btn btn-primary">💻 Download Code File</button>
+          <button type="button" onclick="window.print()" class="btn btn-secondary">📄 Export PDF</button>
+          <button type="button" id="downloadHtmlBtn" class="btn btn-primary">💻 Compile Standalone HTML</button>
         </div>
 
       </form>
     </aside>
 
-    <!-- ================= RIGHT PANEL: LIVE PORTFOLIO ================= -->
+    <!-- ================= RIGHT PANEL: LIVE PREVIEW ================= -->
     <main class="preview-panel" id="previewPanel">
       
       <div class="browser-frame-liquid">
@@ -266,7 +268,7 @@
           <div class="browser-address" id="browserAddressBar" title="Click to copy link">
             <span class="lock-icon">🔒</span>
             <span id="previewUrl">https://portfolify.me/jordan-lee</span>
-            <span class="copy-badge">Copy</span>
+            <span class="copy-badge">Copy Link</span>
           </div>
           <div class="page-nav-pills">
             <a href="#pageHero" class="page-pill">Page 1</a>

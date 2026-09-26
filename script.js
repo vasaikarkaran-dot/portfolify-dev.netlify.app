@@ -1,9 +1,8 @@
 // ==========================================
-// BULLETPROOF SAFE ENTRY POINT
+// PORTFOLIFY SMART PRESET SCRIPT
 // ==========================================
 function initPortfolify() {
 
-  // 1. SELECT DOM NODES
   const welcomeModal = document.getElementById('welcomeModal');
   const startStudioBtn = document.getElementById('startStudioBtn');
 
@@ -37,7 +36,6 @@ function initPortfolify() {
   const addProjectBtn = document.getElementById('addProjectBtn');
   const previewProjectsList = document.getElementById('previewProjectsList');
 
-  // Certificate Elements
   const certInput = document.getElementById('certInput');
   const certIssuerInput = document.getElementById('certIssuerInput');
   const certFileInput = document.getElementById('certFileInput');
@@ -49,7 +47,6 @@ function initPortfolify() {
   const previewCertUrl = document.getElementById('previewCertUrl');
   const openCertModalBtn = document.getElementById('openCertModalBtn');
 
-  // Document Viewer Modal
   const docViewerModal = document.getElementById('docViewerModal');
   const docModalImg = document.getElementById('docModalImg');
   const closeDocModalBtn = document.getElementById('closeDocModalBtn');
@@ -60,6 +57,9 @@ function initPortfolify() {
   const downloadHtmlBtn = document.getElementById('downloadHtmlBtn');
   const browserAddressBar = document.getElementById('browserAddressBar');
   const copyToast = document.getElementById('copyToast');
+
+  const fresherPresetBtn = document.getElementById('fresherPresetBtn');
+  const seniorPresetBtn = document.getElementById('seniorPresetBtn');
 
   // Preview Targets
   const portfolioWebsite = document.getElementById('portfolioWebsite');
@@ -98,8 +98,82 @@ function initPortfolify() {
 
   let certificateDocSrc = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=700&q=80';
 
-  // 2. THEME ENGINE
-  const allThemes = ['theme-liquid-light', 'theme-vercel', 'theme-supabase', 'theme-linear', 'theme-cyber', 'theme-dracula'];
+  // ⚡ SMART PRESETS (Fresher vs Senior)
+  if (fresherPresetBtn) {
+    fresherPresetBtn.addEventListener('click', () => {
+      if (roleInput) roleInput.value = 'Computer Science Student & Tech Explorer';
+      if (bioInput) bioInput.value = 'First-year engineering student eager to learn programming, solve logical puzzles, and build simple web apps.';
+      if (statProjectsInput) statProjectsInput.value = '3+';
+      if (statCommitsInput) statCommitsInput.value = '50+';
+      if (statProblemsInput) statProblemsInput.value = '40+';
+      if (skillsInput) skillsInput.value = 'C, C++, Python, HTML5, CSS3';
+      if (expRoleInput) expRoleInput.value = 'Coding Club Member';
+      if (expOrgInput) expOrgInput.value = 'College Technical Society';
+      if (expDescInput) expDescInput.value = 'Participated in coding bootcamps and collaborated on group mini-projects.';
+      if (certInput) certInput.value = 'Python Programming Fundamentals';
+      if (certIssuerInput) certIssuerInput.value = 'Coursera';
+
+      projects = [
+        {
+          id: 1,
+          title: 'Student Task Manager',
+          desc: 'Simple web app for tracking daily college assignments and exam dates.',
+          tech: 'HTML5, CSS3, JavaScript',
+          demoUrl: 'https://example.com/demo',
+          githubUrl: 'https://github.com/example/tasks',
+          image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
+        }
+      ];
+      renderProjectForms();
+      renderPreviewProjects();
+      document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
+      renderSkills();
+    });
+  }
+
+  if (seniorPresetBtn) {
+    seniorPresetBtn.addEventListener('click', () => {
+      if (roleInput) roleInput.value = 'Final Year CSE Student & Full-Stack Developer';
+      if (bioInput) bioInput.value = 'Engineering senior experienced in full-stack web applications, cloud deployments, and collaborative hackathons.';
+      if (statProjectsInput) statProjectsInput.value = '12+';
+      if (statCommitsInput) statCommitsInput.value = '450+';
+      if (statProblemsInput) statProblemsInput.value = '250+';
+      if (skillsInput) skillsInput.value = 'Java, Python, React, Node.js, SQL, Docker, Git';
+      if (expRoleInput) expRoleInput.value = 'Software Engineering Intern';
+      if (expOrgInput) expOrgInput.value = 'Enterprise Software Labs';
+      if (expDescInput) expDescInput.value = 'Engineered microservice endpoints, reduced API latency by 25%, and instituted automated tests.';
+      if (certInput) certInput.value = 'Full-Stack Cloud Architecture Certified';
+      if (certIssuerInput) certIssuerInput.value = 'Meta / Coursera';
+
+      projects = [
+        {
+          id: 1,
+          title: 'Cloud Document Manager',
+          desc: 'Scalable web service providing real-time text synchronization and encrypted cloud storage.',
+          tech: 'TypeScript, React, Node.js, WebSockets',
+          demoUrl: 'https://example.com/demo',
+          githubUrl: 'https://github.com/example/cloud-docs',
+          image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
+        },
+        {
+          id: 2,
+          title: 'Autonomous Campus Transit Bot',
+          desc: 'Pathfinding simulation engine incorporating Dijkstra and A* algorithms with analytics.',
+          tech: 'Java, JavaFX, Algorithms',
+          demoUrl: 'https://example.com/live',
+          githubUrl: 'https://github.com/example/transit-bot',
+          image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80'
+        }
+      ];
+      renderProjectForms();
+      renderPreviewProjects();
+      document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
+      renderSkills();
+    });
+  }
+
+  // Theme Switcher
+  const allThemes = ['theme-liquid-light', 'theme-vercel', 'theme-supabase', 'theme-linear', 'theme-cyber'];
 
   function switchTheme(newTheme) {
     allThemes.forEach(cls => {
@@ -109,24 +183,22 @@ function initPortfolify() {
     document.body.classList.add(newTheme);
     if (portfolioWebsite) portfolioWebsite.classList.add(newTheme);
 
-    if (copyToast && window.innerWidth <= 900) {
-      copyToast.textContent = `Theme applied! Tap 'Live Preview'`;
-      copyToast.classList.add('show');
-      setTimeout(() => copyToast.classList.remove('show'), 2000);
+    if (window.innerWidth <= 900 && togglePreviewBtn && toggleEditorBtn) {
+      togglePreviewBtn.classList.add('active');
+      toggleEditorBtn.classList.remove('active');
+      editorPanel.classList.add('mobile-hidden');
+      previewPanel.classList.add('mobile-visible');
     }
   }
 
   if (themeSelect) {
-    themeSelect.addEventListener('change', (e) => {
-      switchTheme(e.target.value);
+    ['change', 'input'].forEach(evt => {
+      themeSelect.addEventListener(evt, (e) => switchTheme(e.target.value));
     });
   }
 
-  // 3. 3D MODAL & MOBILE SWITCHER
   if (startStudioBtn && welcomeModal) {
-    startStudioBtn.addEventListener('click', () => {
-      welcomeModal.classList.add('hidden');
-    });
+    startStudioBtn.addEventListener('click', () => welcomeModal.classList.add('hidden'));
   }
 
   if (toggleEditorBtn && togglePreviewBtn && editorPanel && previewPanel) {
@@ -136,7 +208,6 @@ function initPortfolify() {
       editorPanel.classList.remove('mobile-hidden');
       previewPanel.classList.remove('mobile-visible');
     });
-
     togglePreviewBtn.addEventListener('click', () => {
       togglePreviewBtn.classList.add('active');
       toggleEditorBtn.classList.remove('active');
@@ -145,7 +216,7 @@ function initPortfolify() {
     });
   }
 
-  // 4. DYNAMIC PROJECTS
+  // Projects State
   let projects = [
     {
       id: 1,
@@ -209,40 +280,18 @@ function initPortfolify() {
         </div>
       `;
 
-      card.querySelector('.proj-title').addEventListener('input', (e) => {
-        proj.title = e.target.value;
-        renderPreviewProjects();
-      });
-
-      card.querySelector('.proj-desc').addEventListener('input', (e) => {
-        proj.desc = e.target.value;
-        renderPreviewProjects();
-      });
-
-      card.querySelector('.proj-demo').addEventListener('input', (e) => {
-        proj.demoUrl = e.target.value;
-        renderPreviewProjects();
-      });
-
-      card.querySelector('.proj-github').addEventListener('input', (e) => {
-        proj.githubUrl = e.target.value;
-        renderPreviewProjects();
-      });
-
-      card.querySelector('.proj-tech').addEventListener('input', (e) => {
-        proj.tech = e.target.value;
-        renderPreviewProjects();
-      });
+      card.querySelector('.proj-title').addEventListener('input', (e) => { proj.title = e.target.value; renderPreviewProjects(); });
+      card.querySelector('.proj-desc').addEventListener('input', (e) => { proj.desc = e.target.value; renderPreviewProjects(); });
+      card.querySelector('.proj-demo').addEventListener('input', (e) => { proj.demoUrl = e.target.value; renderPreviewProjects(); });
+      card.querySelector('.proj-github').addEventListener('input', (e) => { proj.githubUrl = e.target.value; renderPreviewProjects(); });
+      card.querySelector('.proj-tech').addEventListener('input', (e) => { proj.tech = e.target.value; renderPreviewProjects(); });
 
       const imageInput = card.querySelector('.proj-image-input');
       imageInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
           const reader = new FileReader();
-          reader.onload = (event) => {
-            proj.image = event.target.result;
-            renderPreviewProjects();
-          };
+          reader.onload = (event) => { proj.image = event.target.result; renderPreviewProjects(); };
           reader.readAsDataURL(file);
         }
       });
@@ -255,7 +304,6 @@ function initPortfolify() {
           updateProgress();
         });
       }
-
       projectsFormList.appendChild(card);
     });
   }
@@ -267,7 +315,6 @@ function initPortfolify() {
     projects.forEach((proj, index) => {
       const article = document.createElement('article');
       article.className = 'project-entry';
-
       const tagsArray = proj.tech ? proj.tech.split(',').map(t => t.trim()).filter(Boolean) : ['Tech Stack'];
 
       article.innerHTML = `
@@ -289,7 +336,6 @@ function initPortfolify() {
           </div>
         </div>
       `;
-
       previewProjectsList.appendChild(article);
     });
   }
@@ -297,12 +343,7 @@ function initPortfolify() {
   if (addProjectBtn) {
     addProjectBtn.addEventListener('click', () => {
       projects.push({
-        id: Date.now(),
-        title: '',
-        desc: '',
-        tech: '',
-        demoUrl: '',
-        githubUrl: '',
+        id: Date.now(), title: '', desc: '', tech: '', demoUrl: '', githubUrl: '',
         image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80'
       });
       renderProjectForms();
@@ -311,26 +352,10 @@ function initPortfolify() {
     });
   }
 
-  // 5. CERTIFICATE EVENTS
-  if (certInput && previewCert) {
-    certInput.addEventListener('input', () => {
-      previewCert.textContent = certInput.value.trim() || 'Certificate / Honor Title';
-      updateProgress();
-    });
-  }
-
-  if (certIssuerInput && previewCertIssuer) {
-    certIssuerInput.addEventListener('input', () => {
-      previewCertIssuer.textContent = certIssuerInput.value.trim() || 'Issuing Authority';
-    });
-  }
-
-  if (certUrlInput && previewCertUrl) {
-    certUrlInput.addEventListener('input', () => {
-      const url = certUrlInput.value.trim();
-      previewCertUrl.href = url || '#';
-    });
-  }
+  // Certificate Modal
+  if (certInput && previewCert) certInput.addEventListener('input', () => { previewCert.textContent = certInput.value.trim() || 'Certificate / Honor Title'; updateProgress(); });
+  if (certIssuerInput && previewCertIssuer) certIssuerInput.addEventListener('input', () => { previewCertIssuer.textContent = certIssuerInput.value.trim() || 'Issuing Authority'; });
+  if (certUrlInput && previewCertUrl) certUrlInput.addEventListener('input', () => { previewCertUrl.href = certUrlInput.value.trim() || '#'; });
 
   if (certFileInput) {
     certFileInput.addEventListener('change', (e) => {
@@ -348,38 +373,20 @@ function initPortfolify() {
   }
 
   if (openCertModalBtn && docViewerModal && docModalImg) {
-    openCertModalBtn.addEventListener('click', () => {
-      docModalImg.src = certificateDocSrc;
-      docViewerModal.classList.add('active');
-    });
+    openCertModalBtn.addEventListener('click', () => { docModalImg.src = certificateDocSrc; docViewerModal.classList.add('active'); });
   }
-
   if (previewCertImg && docViewerModal && docModalImg) {
-    previewCertImg.addEventListener('click', () => {
-      docModalImg.src = certificateDocSrc;
-      docViewerModal.classList.add('active');
-    });
+    previewCertImg.addEventListener('click', () => { docModalImg.src = certificateDocSrc; docViewerModal.classList.add('active'); });
   }
-
   if (closeDocModalBtn && docViewerModal) {
-    closeDocModalBtn.addEventListener('click', () => {
-      docViewerModal.classList.remove('active');
-    });
+    closeDocModalBtn.addEventListener('click', () => docViewerModal.classList.remove('active'));
   }
-
   if (docViewerModal) {
-    docViewerModal.addEventListener('click', (e) => {
-      if (e.target === docViewerModal) {
-        docViewerModal.classList.remove('active');
-      }
-    });
+    docViewerModal.addEventListener('click', (e) => { if (e.target === docViewerModal) docViewerModal.classList.remove('active'); });
   }
 
-  // 6. AUTO CAPITALIZE
-  function toTitleCase(str) {
-    return str.replace(/\b\w/g, char => char.toUpperCase());
-  }
-
+  // Live Bindings
+  function toTitleCase(str) { return str.replace(/\b\w/g, char => char.toUpperCase()); }
   document.querySelectorAll('[data-capitalize="words"]').forEach(input => {
     input.addEventListener('input', () => {
       const cursor = input.selectionStart;
@@ -388,24 +395,17 @@ function initPortfolify() {
     });
   });
 
-  // 7. INPUT LISTENERS
-  const trackedInputs = [
-    nameInput, roleInput, bioInput, emailInput, skillsInput,
-    eduDegreeInput, eduCollegeInput, expRoleInput, certInput
-  ].filter(Boolean);
+  const trackedInputs = [nameInput, roleInput, bioInput, emailInput, skillsInput, eduDegreeInput, eduCollegeInput, expRoleInput, certInput].filter(Boolean);
 
   function updateProgress() {
     if (!meterFill || !meterPercent) return;
     let filledCount = 0;
-    trackedInputs.forEach(inp => {
-      if (inp.value.trim() !== '') filledCount++;
-    });
+    trackedInputs.forEach(inp => { if (inp.value.trim() !== '') filledCount++; });
     if (photoInput && photoInput.files.length > 0) filledCount++;
     if (projects.length > 0 && projects[0].title.trim() !== '') filledCount++;
 
     const total = trackedInputs.length + 2;
     const percentage = Math.round((filledCount / total) * 100);
-
     meterFill.style.width = `${percentage}%`;
     meterPercent.textContent = `${percentage}%`;
   }
@@ -430,32 +430,10 @@ function initPortfolify() {
     });
   }
 
-  if (bioInput && previewBio) {
-    bioInput.addEventListener('input', () => {
-      previewBio.textContent = bioInput.value.trim() || 'Write a short introduction in the form...';
-      updateProgress();
-    });
-  }
-
-  if (statProjectsInput && previewStatProjects) {
-    statProjectsInput.addEventListener('input', () => {
-      const val = statProjectsInput.value.trim() || '12+';
-      previewStatProjects.textContent = val;
-      if (previewFloatProjects) previewFloatProjects.textContent = val;
-    });
-  }
-
-  if (statCommitsInput && previewStatCommits) {
-    statCommitsInput.addEventListener('input', () => {
-      previewStatCommits.textContent = statCommitsInput.value.trim() || '380+';
-    });
-  }
-
-  if (statProblemsInput && previewStatProblems) {
-    statProblemsInput.addEventListener('input', () => {
-      previewStatProblems.textContent = statProblemsInput.value.trim() || '190+';
-    });
-  }
+  if (bioInput && previewBio) bioInput.addEventListener('input', () => { previewBio.textContent = bioInput.value.trim() || 'Short bio...'; updateProgress(); });
+  if (statProjectsInput && previewStatProjects) statProjectsInput.addEventListener('input', () => { const v = statProjectsInput.value.trim() || '12+'; previewStatProjects.textContent = v; if (previewFloatProjects) previewFloatProjects.textContent = v; });
+  if (statCommitsInput && previewStatCommits) statCommitsInput.addEventListener('input', () => { previewStatCommits.textContent = statCommitsInput.value.trim() || '380+'; });
+  if (statProblemsInput && previewStatProblems) statProblemsInput.addEventListener('input', () => { previewStatProblems.textContent = statProblemsInput.value.trim() || '190+'; });
 
   if (emailInput && previewEmail && connectBtn) {
     emailInput.addEventListener('input', () => {
@@ -470,24 +448,9 @@ function initPortfolify() {
     });
   }
 
-  if (phoneInput && previewPhone) {
-    phoneInput.addEventListener('input', () => {
-      const val = phoneInput.value.trim();
-      previewPhone.textContent = val ? `📞 ${val}` : '📞 +91 00000 00000';
-    });
-  }
-
-  if (linkedinInput && previewLinkedin) {
-    linkedinInput.addEventListener('input', () => {
-      previewLinkedin.href = linkedinInput.value.trim() || '#';
-    });
-  }
-
-  if (githubInput && previewGithub) {
-    githubInput.addEventListener('input', () => {
-      previewGithub.href = githubInput.value.trim() || '#';
-    });
-  }
+  if (phoneInput && previewPhone) phoneInput.addEventListener('input', () => { previewPhone.textContent = phoneInput.value.trim() ? `📞 ${phoneInput.value.trim()}` : '📞 +91 00000 00000'; });
+  if (linkedinInput && previewLinkedin) linkedinInput.addEventListener('input', () => { previewLinkedin.href = linkedinInput.value.trim() || '#'; });
+  if (githubInput && previewGithub) githubInput.addEventListener('input', () => { previewGithub.href = githubInput.value.trim() || '#'; });
 
   function renderSkills() {
     if (!previewSkills || !skillsInput) return;
@@ -501,59 +464,21 @@ function initPortfolify() {
     });
     updateProgress();
   }
+  if (skillsInput) skillsInput.addEventListener('input', renderSkills);
 
-  if (skillsInput) {
-    skillsInput.addEventListener('input', renderSkills);
-  }
-
-  if (eduDegreeInput && previewEduDegree) {
-    eduDegreeInput.addEventListener('input', () => {
-      previewEduDegree.textContent = eduDegreeInput.value.trim() || 'Degree & Specialization';
-      updateProgress();
-    });
-  }
-
-  if (eduYearInput && previewEduYear) {
-    eduYearInput.addEventListener('input', () => {
-      previewEduYear.textContent = eduYearInput.value.trim() || 'Graduation Year';
-    });
-  }
-
-  if (eduCollegeInput && previewEduCollege) {
-    eduCollegeInput.addEventListener('input', () => {
-      previewEduCollege.textContent = eduCollegeInput.value.trim() || 'College or University Name';
-      updateProgress();
-    });
-  }
-
-  if (expRoleInput && previewExpRole) {
-    expRoleInput.addEventListener('input', () => {
-      previewExpRole.textContent = expRoleInput.value.trim() || 'Role or Internship';
-      updateProgress();
-    });
-  }
-
-  if (expOrgInput && previewExpOrg) {
-    expOrgInput.addEventListener('input', () => {
-      previewExpOrg.textContent = expOrgInput.value.trim() || 'Organization';
-    });
-  }
-
-  if (expDescInput && previewExpDesc) {
-    expDescInput.addEventListener('input', () => {
-      previewExpDesc.textContent = expDescInput.value.trim() || 'Responsibilities and achievements...';
-    });
-  }
+  if (eduDegreeInput && previewEduDegree) { eduDegreeInput.addEventListener('input', () => { previewEduDegree.textContent = eduDegreeInput.value.trim() || 'Degree'; updateProgress(); }); }
+  if (eduYearInput && previewEduYear) eduYearInput.addEventListener('input', () => { previewEduYear.textContent = eduYearInput.value.trim() || 'Year'; });
+  if (eduCollegeInput && previewEduCollege) { eduCollegeInput.addEventListener('input', () => { previewEduCollege.textContent = eduCollegeInput.value.trim() || 'College'; updateProgress(); }); }
+  if (expRoleInput && previewExpRole) { expRoleInput.addEventListener('input', () => { previewExpRole.textContent = expRoleInput.value.trim() || 'Role'; updateProgress(); }); }
+  if (expOrgInput && previewExpOrg) expOrgInput.addEventListener('input', () => { previewExpOrg.textContent = expOrgInput.value.trim() || 'Org'; });
+  if (expDescInput && previewExpDesc) expDescInput.addEventListener('input', () => { previewExpDesc.textContent = expDescInput.value.trim() || 'Desc'; });
 
   if (photoInput && previewPhoto) {
     photoInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = (event) => {
-          previewPhoto.src = event.target.result;
-          updateProgress();
-        };
+        reader.onload = (event) => { previewPhoto.src = event.target.result; updateProgress(); };
         reader.readAsDataURL(file);
       }
     });
@@ -569,7 +494,7 @@ function initPortfolify() {
     });
   }
 
-  // 8. SAMPLE DATA RESET
+  // Reset Demo / Sample
   if (demoBtn) {
     demoBtn.addEventListener('click', () => {
       if (nameInput) nameInput.value = 'Jordan Lee';
@@ -578,73 +503,30 @@ function initPortfolify() {
       if (statProjectsInput) statProjectsInput.value = '12+';
       if (statCommitsInput) statCommitsInput.value = '380+';
       if (statProblemsInput) statProblemsInput.value = '190+';
-
       if (emailInput) emailInput.value = 'jordan.lee@university.edu';
       if (phoneInput) phoneInput.value = '+91 98765 43210';
-      if (linkedinInput) linkedinInput.value = 'https://linkedin.com';
-      if (githubInput) githubInput.value = 'https://github.com';
       if (skillsInput) skillsInput.value = 'Java, Python, C++, HTML5, CSS3, JavaScript, TypeScript, Git, SQL, Docker';
-
-      if (eduDegreeInput) eduDegreeInput.value = 'B.Tech in Computer Engineering';
-      if (eduYearInput) eduYearInput.value = 'Class of 2026 | CGPA: 8.8';
-      if (eduCollegeInput) eduCollegeInput.value = 'Institute of Technology & Engineering';
-
-      if (expRoleInput) expRoleInput.value = 'Software Engineering Intern';
-      if (expOrgInput) expOrgInput.value = 'Tech Innovations Lab';
-      if (expDescInput) expDescInput.value = 'Engineered responsive dashboard components, optimized API latency by 25%.';
-
-      if (certInput) certInput.value = 'Full-Stack Web Development Certified';
-      if (certIssuerInput) certIssuerInput.value = 'Meta / Coursera';
-      if (certUrlInput) certUrlInput.value = 'https://coursera.org/verify';
-      certificateDocSrc = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=700&q=80';
-      if (previewCertImg) previewCertImg.src = certificateDocSrc;
-
       document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderSkills();
     });
   }
 
-  // 9. DOWNLOAD HTML EXPORT
+  // HTML Export
   if (downloadHtmlBtn && portfolioWebsite && previewName) {
     downloadHtmlBtn.addEventListener('click', () => {
       let embeddedCSS = '';
       for (let sheet of document.styleSheets) {
-        try {
-          for (let rule of sheet.cssRules) {
-            embeddedCSS += rule.cssText + '\n';
-          }
-        } catch (e) {}
+        try { for (let rule of sheet.cssRules) embeddedCSS += rule.cssText + '\n'; } catch (e) {}
       }
-
-      const exportHtml = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${previewName.textContent} - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body { margin:0; background:#f1f4f9; display:flex; justify-content:center; padding: 40px 10px; min-height: 100vh; font-family:'Plus Jakarta Sans', sans-serif; }
-    .browser-frame-liquid { width: 100%; max-width: 860px; border-radius: 20px; border: 1px solid #e2e8f0; background:#ffffff; overflow:hidden; }
-    ${embeddedCSS}
-  </style>
-</head>
-<body>
-  <div class="browser-frame-liquid">
-    ${portfolioWebsite.outerHTML}
-  </div>
-</body>
-</html>`;
-
+      const exportHtml = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${previewName.textContent} - Portfolio</title><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"><style>body{margin:0;background:#f1f4f9;display:flex;justify-content:center;padding:40px 10px;min-height:100vh;font-family:'Plus Jakarta Sans',sans-serif;}.browser-frame-liquid{width:100%;max-width:860px;border-radius:20px;border:1px solid #e2e8f0;background:#ffffff;overflow:hidden;}${embeddedCSS}</style></head><body><div class="browser-frame-liquid">${portfolioWebsite.outerHTML}</div></body></html>`;
       const blob = new Blob([exportHtml], { type: 'text/html' });
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = `${previewName.textContent.toLowerCase().replace(/\s+/g, '-')}-portfolio.html`;
-      downloadLink.click();
+      const dl = document.createElement('a');
+      dl.href = URL.createObjectURL(blob);
+      dl.download = `${previewName.textContent.toLowerCase().replace(/\s+/g, '-')}-portfolio.html`;
+      dl.click();
     });
   }
 
-  // Initial Execution
   renderProjectForms();
   renderPreviewProjects();
   renderSkills();
