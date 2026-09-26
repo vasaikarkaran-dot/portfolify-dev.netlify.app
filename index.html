@@ -5,10 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolify • by Karan Vasaikar</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="theme-liquid-light">
 
-  <!-- ================= 3D INSPIRING WELCOME POPUP MODAL ================= -->
+  <!-- Ambient Liquid Glowing Mesh Background -->
+  <div class="liquid-bg-wrap">
+    <div class="liquid-orb orb-1"></div>
+    <div class="liquid-orb orb-2"></div>
+    <div class="liquid-orb orb-3"></div>
+  </div>
+
+  <!-- ================= 3D WELCOME POPUP MODAL ================= -->
   <div id="welcomeModal" class="welcome-overlay">
     <div class="welcome-card-3d">
       <div class="glow-orb-backdrop"></div>
@@ -56,7 +66,7 @@
     </div>
   </div>
 
-  <!-- Mobile Viewport Switcher -->
+  <!-- Mobile View Switcher -->
   <div class="mobile-switch-bar">
     <button type="button" id="toggleEditorBtn" class="m-switch-btn active">✏️ Edit Details</button>
     <button type="button" id="togglePreviewBtn" class="m-switch-btn">👁️ Live Preview</button>
@@ -64,14 +74,14 @@
 
   <div class="app-layout">
     
-    <!-- LEFT PANEL: FORM EDITOR -->
+    <!-- ================= LEFT PANEL: FORM EDITOR ================= -->
     <aside class="editor-panel" id="editorPanel">
       <div class="panel-header">
         <div>
           <h2>Portfolify</h2>
           <p class="panel-subtitle">By Karan Vasaikar • Student Portfolio Generator</p>
         </div>
-        <button type="button" id="demoBtn" class="pill-btn secondary">⚡ Reset Sample</button>
+        <button type="button" id="demoBtn" class="glass-pill-btn">⚡ Reset Sample</button>
       </div>
 
       <!-- Completeness Meter -->
@@ -87,23 +97,17 @@
 
       <form id="portfolioForm">
         
-        <!-- Clean Native Theme Selector -->
+        <!-- Theme & Photo Picker -->
         <div class="form-row">
           <div class="form-group half">
             <label>Developer Theme Preset</label>
             <select id="themeSelect">
-              <optgroup label="🌌 Dark & Cyber">
-                <option value="theme-vercel">▲ Vercel Obsidian (Default)</option>
-                <option value="theme-supabase">⚡ Supabase Emerald</option>
-                <option value="theme-linear">🔮 Linear Dark Violet</option>
-                <option value="theme-cyber">🌐 Cyberpunk Neon</option>
-                <option value="theme-dracula">🧛 Dracula Pro</option>
-                <option value="theme-github-dark">🐙 GitHub Pro Dark</option>
-                <option value="theme-tailwind">🌊 Tailwind Teal</option>
-              </optgroup>
-              <optgroup label="💼 Clean & Executive">
-                <option value="theme-stripe">💳 Stripe Executive Light</option>
-              </optgroup>
+              <option value="theme-liquid-light">💎 Liquid Pearl Light (Default)</option>
+              <option value="theme-vercel">▲ Vercel Obsidian Dark</option>
+              <option value="theme-supabase">⚡ Supabase Emerald</option>
+              <option value="theme-linear">🔮 Linear Violet</option>
+              <option value="theme-cyber">🌐 Cyberpunk Neon</option>
+              <option value="theme-dracula">🧛 Dracula Pro</option>
             </select>
           </div>
           <div class="form-group half">
@@ -130,7 +134,7 @@
           <textarea id="bioInput" rows="3" placeholder="Write a brief overview...">Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.</textarea>
         </div>
 
-        <!-- Quick Numerical Highlights -->
+        <!-- Coding Stats -->
         <div class="form-row">
           <div class="form-group third">
             <label>Completed Projects</label>
@@ -190,7 +194,7 @@
           <input type="text" id="eduCollegeInput" value="Institute of Technology & Engineering" placeholder="e.g. Department of Engineering" data-capitalize="words">
         </div>
 
-        <!-- Experience / Role -->
+        <!-- Experience -->
         <div class="form-row">
           <div class="form-group half">
             <label>Role / Position</label>
@@ -207,14 +211,14 @@
           <textarea id="expDescInput" rows="2" placeholder="Brief summary...">Engineered responsive dashboard components, optimized API latency by 25%, and integrated automated unit tests.</textarea>
         </div>
 
-        <!-- Section 2: Projects with Screenshot & Demo Links -->
+        <!-- Section 2: Projects -->
         <div class="section-badge">📁 Page 2: Projects (With Screenshots & Links)</div>
 
         <div id="projectsFormList"></div>
 
         <button type="button" id="addProjectBtn" class="add-proj-btn">+ Add Another Project</button>
 
-        <!-- Section 3: Verified Certification with Document Proof -->
+        <!-- Section 3: Verified Certification -->
         <div class="section-badge">📜 Certification & Document Proof</div>
 
         <div class="cert-input-card">
@@ -238,7 +242,7 @@
           </div>
         </div>
 
-        <!-- Export Buttons -->
+        <!-- Export Actions -->
         <div class="action-footer">
           <button type="button" onclick="window.print()" class="btn btn-secondary">📄 Export Multi-Page PDF</button>
           <button type="button" id="downloadHtmlBtn" class="btn btn-primary">💻 Download Code File</button>
@@ -247,12 +251,12 @@
       </form>
     </aside>
 
-    <!-- RIGHT PANEL: DESKTOP BROWSER PREVIEW (2-PAGE SCROLL) -->
+    <!-- ================= RIGHT PANEL: LIVE PORTFOLIO ================= -->
     <main class="preview-panel" id="previewPanel">
       
-      <div class="browser-window">
+      <div class="browser-frame-liquid">
         
-        <!-- Browser Bar -->
+        <!-- Browser Header -->
         <div class="browser-bar">
           <div class="browser-dots">
             <span class="dot red"></span>
@@ -270,69 +274,97 @@
           </div>
         </div>
 
-        <!-- The Actual Scrollable Portfolio Website -->
-        <div class="browser-content theme-vercel" id="portfolioWebsite">
+        <!-- Portfolio Document Viewport -->
+        <div class="browser-content theme-liquid-light" id="portfolioWebsite">
           
-          <!-- ================= PAGE 1: HERO, METRICS & ACADEMICS ================= -->
+          <!-- Liquid Site Nav -->
+          <nav class="liquid-site-nav">
+            <div class="site-logo">
+              <span class="logo-mark">⚡</span>
+              <div class="logo-meta">
+                <strong id="previewBrandName">Jordan Lee</strong>
+                <span id="previewBrandRole">Student Developer</span>
+              </div>
+            </div>
+            <div class="nav-links-cluster">
+              <a href="#pageHero">Overview</a>
+              <a href="#sectionAcademics">Academics</a>
+              <a href="#pageProjects">Projects</a>
+            </div>
+            <a id="navConnectBtn" href="mailto:jordan.lee@university.edu" class="liquid-nav-btn">Let's Connect ↗</a>
+          </nav>
+
+          <!-- ================= PAGE 1 ================= -->
           <section class="portfolio-page" id="pageHero">
             
             <header class="portfolio-hero">
-              <div class="hero-identity">
-                <div class="photo-wrapper">
-                  <img id="previewPhoto" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Profile Photo">
-                  <span class="status-indicator" title="Open to opportunities"></span>
+              <div class="hero-left-column">
+                <span class="badge-role" id="previewRole">Computer Science Student & Full-Stack Developer</span>
+                <h1 id="previewName">Jordan Lee</h1>
+                <p id="previewBio">Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.</p>
+                
+                <div class="hero-cta-strip">
+                  <a href="#pageProjects" class="btn-liquid-primary">View Projects ↗</a>
+                  <a id="connectBtn" href="mailto:jordan.lee@university.edu" class="btn-liquid-glass">Contact Me ↓</a>
                 </div>
-                <div class="hero-text">
-                  <div class="badge-role" id="previewRole">Computer Science Student & Full-Stack Developer</div>
-                  <h1 id="previewName">Jordan Lee</h1>
-                  <p id="previewBio">Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.</p>
+
+                <!-- Contact Links -->
+                <div class="hero-links">
+                  <a id="previewEmail" href="mailto:jordan.lee@university.edu">📧 jordan.lee@university.edu</a>
+                  <span id="previewPhone">📞 +91 98765 43210</span>
+                  <a id="previewLinkedin" href="https://linkedin.com" target="_blank">LinkedIn ↗</a>
+                  <a id="previewGithub" href="https://github.com" target="_blank">GitHub ↗</a>
                 </div>
               </div>
 
-              <!-- Quick Numerical Stat Cards -->
-              <div class="stats-strip">
-                <div class="stat-card">
-                  <span class="stat-number" id="previewStatProjects">12+</span>
-                  <span class="stat-label">Projects Built</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number" id="previewStatCommits">380+</span>
-                  <span class="stat-label">GitHub Commits</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number" id="previewStatProblems">190+</span>
-                  <span class="stat-label">Problems Solved</span>
-                </div>
-              </div>
+              <!-- Cutout Portrait & Floating Liquid Badges -->
+              <div class="hero-right-column">
+                <div class="portrait-glass-pod">
+                  <div class="mesh-backdrop-glow"></div>
+                  <img id="previewPhoto" class="portrait-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Profile Photo">
 
-              <!-- Social Links Strip -->
-              <div class="hero-links">
-                <a id="previewEmail" href="mailto:jordan.lee@university.edu">📧 jordan.lee@university.edu</a>
-                <span id="previewPhone">📞 +91 98765 43210</span>
-                <a id="previewLinkedin" href="https://linkedin.com" target="_blank">LinkedIn ↗</a>
-                <a id="previewGithub" href="https://github.com" target="_blank">GitHub ↗</a>
+                  <!-- Floating Badge Top Right -->
+                  <div class="floating-glass-card top-right-card">
+                    <strong class="float-num" id="previewFloatProjects">12+</strong>
+                    <span class="float-lbl">Projects Built</span>
+                  </div>
+
+                  <!-- Floating Badge Bottom Left -->
+                  <div class="floating-glass-card bottom-left-card">
+                    <div class="float-metric-wrap">
+                      <span class="growth-icon">↗</span>
+                      <strong class="float-num-sm">+120%</strong>
+                    </div>
+                    <span class="float-lbl">Code Impact</span>
+                  </div>
+                </div>
               </div>
             </header>
 
-            <!-- Technical Arsenal -->
-            <div class="page-block">
-              <h3 class="section-heading">Core Technical Arsenal</h3>
-              <div id="previewSkills" class="skills-cluster">
-                <span class="tech-pill">Java</span>
-                <span class="tech-pill">Python</span>
-                <span class="tech-pill">C++</span>
-                <span class="tech-pill">HTML5</span>
-                <span class="tech-pill">CSS3</span>
-                <span class="tech-pill">JavaScript</span>
-                <span class="tech-pill">TypeScript</span>
-                <span class="tech-pill">Git</span>
-                <span class="tech-pill">SQL</span>
-                <span class="tech-pill">Docker</span>
+            <!-- Numbers / Stats -->
+            <div class="stats-strip">
+              <div class="stat-card">
+                <span class="stat-number" id="previewStatProjects">12+</span>
+                <span class="stat-label">Projects Built</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="previewStatCommits">380+</span>
+                <span class="stat-label">GitHub Commits</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="previewStatProblems">190+</span>
+                <span class="stat-label">Problems Solved</span>
               </div>
             </div>
 
-            <!-- Two-Column Block: Education & Experience -->
-            <div class="two-col-grid">
+            <!-- Skills -->
+            <div class="page-block">
+              <h3 class="section-heading">Core Technical Arsenal</h3>
+              <div id="previewSkills" class="skills-cluster"></div>
+            </div>
+
+            <!-- Education & Experience Grid -->
+            <div class="two-col-grid" id="sectionAcademics">
               
               <!-- Education -->
               <div class="page-block">
@@ -346,7 +378,7 @@
                 </div>
               </div>
 
-              <!-- Experience / Role -->
+              <!-- Experience -->
               <div class="page-block">
                 <h3 class="section-heading">Experience & Roles</h3>
                 <div class="content-box">
@@ -367,20 +399,20 @@
 
           </section>
 
-          <!-- ================= PAGE 2: MEDIA PROJECTS & BANNER ================= -->
+          <!-- ================= PAGE 2 ================= -->
           <section class="portfolio-page page-two" id="pageProjects">
             
             <div class="page-divider">
               <span class="divider-label">Page 02 • Projects & Production Work</span>
             </div>
 
-            <!-- Dynamic Media Projects -->
+            <!-- Projects Grid -->
             <div class="page-block">
               <h3 class="section-heading">Featured Engineering Projects</h3>
               <div class="projects-grid" id="previewProjectsList"></div>
             </div>
 
-            <!-- Enhanced Certifications with Document Proof -->
+            <!-- Verified Credentials -->
             <div class="page-block">
               <h3 class="section-heading">Verified Credentials & Certifications</h3>
               <div class="cert-proof-card" id="certPreviewCard">
@@ -402,16 +434,16 @@
               </div>
             </div>
 
-            <!-- Connect Footer Banner -->
+            <!-- Footer Banner -->
             <footer class="portfolio-footer">
               <div class="footer-banner">
                 <div>
                   <h4>Interested in collaborating?</h4>
                   <p>Open for internships, entry-level engineering roles, and open-source contributions.</p>
                 </div>
-                <a id="connectBtn" href="mailto:jordan.lee@university.edu" class="connect-action">Get in Touch →</a>
+                <a id="footerConnectBtn" href="mailto:jordan.lee@university.edu" class="connect-action">Get in Touch →</a>
               </div>
-              <p class="copyright-note">Built with Portfolify • Open Engineering Standard</p>
+              <p class="copyright-note">Built with Portfolify • Architected by Karan Vasaikar</p>
             </footer>
 
           </section>
@@ -424,7 +456,7 @@
 
   </div>
 
-  <!-- Document View Modal -->
+  <!-- Document Viewer Modal -->
   <div id="docViewerModal" class="doc-modal-overlay">
     <div class="doc-modal-content">
       <div class="doc-modal-top">
@@ -437,7 +469,7 @@
     </div>
   </div>
 
-  <!-- Toast Notification -->
+  <!-- Toast -->
   <div id="copyToast" class="toast">Link copied to clipboard!</div>
 
   <script src="script.js" defer></script>
