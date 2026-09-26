@@ -1,5 +1,5 @@
 // ==========================================
-// PORTFOLIFY SMART STUDIO SCRIPT (FINAL CLEAN & BLANK FIX)
+// PORTFOLIFY SMART STUDIO SCRIPT (SHORT LINK OPTIMIZED)
 // ==========================================
 function initPortfolify() {
 
@@ -111,7 +111,7 @@ function initPortfolify() {
     }).join(''));
   }
 
-  // 🔗 URL HASH DECODER & MODAL HIDE FIX
+  // 🔗 URL HASH DECODER (Supports Short & Long Keys)
   function loadDataFromUrl() {
     const hash = window.location.hash;
     if (hash && hash.includes('#data=')) {
@@ -120,17 +120,17 @@ function initPortfolify() {
         const jsonString = atou(base64Data);
         const data = JSON.parse(jsonString);
 
-        if (nameInput) nameInput.value = data.name || '';
-        if (roleInput) roleInput.value = data.role || '';
-        if (bioInput) bioInput.value = data.bio || '';
-        if (emailInput) emailInput.value = data.email || '';
-        if (phoneInput) phoneInput.value = data.phone || '';
-        if (linkedinInput) linkedinInput.value = data.linkedin || '';
-        if (githubInput) githubInput.value = data.github || '';
-        if (skillsInput) skillsInput.value = data.skills || '';
-        if (data.projects) projects = data.projects;
-        if (certInput) certInput.value = data.certTitle || '';
-        if (certIssuerInput) certIssuerInput.value = data.certIssuer || '';
+        if (nameInput) nameInput.value = data.n || data.name || '';
+        if (roleInput) roleInput.value = data.r || data.role || '';
+        if (bioInput) bioInput.value = data.b || data.bio || '';
+        if (emailInput) emailInput.value = data.e || data.email || '';
+        if (phoneInput) phoneInput.value = data.p || data.phone || '';
+        if (linkedinInput) linkedinInput.value = data.l || data.linkedin || '';
+        if (githubInput) githubInput.value = data.g || data.github || '';
+        if (skillsInput) skillsInput.value = data.s || data.skills || '';
+        if (data.pr || data.projects) projects = data.pr || data.projects;
+        if (certInput) certInput.value = data.ct || data.certTitle || '';
+        if (certIssuerInput) certIssuerInput.value = data.ci || data.certIssuer || '';
 
         if (welcomeModal) {
           welcomeModal.classList.add('hidden');
@@ -518,22 +518,22 @@ function initPortfolify() {
     });
   }
 
-  // 🔗 SHAREABLE LINK GENERATOR
+  // 🔗 COMPRESSED SHAREABLE LINK GENERATOR (Short Keys)
   if (browserAddressBar && copyToast && previewUrl) {
     browserAddressBar.addEventListener('click', () => {
       try {
         const portfolioData = {
-          name: nameInput ? nameInput.value : '',
-          role: roleInput ? roleInput.value : '',
-          bio: bioInput ? bioInput.value : '',
-          email: emailInput ? emailInput.value : '',
-          phone: phoneInput ? phoneInput.value : '',
-          linkedin: linkedinInput ? linkedinInput.value : '',
-          github: githubInput ? githubInput.value : '',
-          skills: skillsInput ? skillsInput.value : '',
-          projects: projects,
-          certTitle: certInput ? certInput.value : '',
-          certIssuer: certIssuerInput ? certIssuerInput.value : ''
+          n: nameInput ? nameInput.value : '',
+          r: roleInput ? roleInput.value : '',
+          b: bioInput ? bioInput.value : '',
+          e: emailInput ? emailInput.value : '',
+          p: phoneInput ? phoneInput.value : '',
+          l: linkedinInput ? linkedinInput.value : '',
+          g: githubInput ? githubInput.value : '',
+          s: skillsInput ? skillsInput.value : '',
+          pr: projects,
+          ct: certInput ? certInput.value : '',
+          ci: certIssuerInput ? certIssuerInput.value : ''
         };
 
         const jsonString = JSON.stringify(portfolioData);
@@ -545,7 +545,7 @@ function initPortfolify() {
         window.location.hash = `data=${base64Data}`;
 
         navigator.clipboard.writeText(shareableLink).then(() => {
-          copyToast.textContent = 'Shareable link copied to clipboard!';
+          copyToast.textContent = 'Optimized shorter shareable link copied!';
           copyToast.classList.add('show');
           setTimeout(() => copyToast.classList.remove('show'), 2000);
         });
