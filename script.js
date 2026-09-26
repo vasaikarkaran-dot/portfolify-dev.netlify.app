@@ -1,5 +1,5 @@
 // ==========================================
-// PORTFOLIFY SMART STUDIO SCRIPT (SHORT LINK OPTIMIZED)
+// PORTFOLIFY SMART STUDIO SCRIPT (CLEAN & NO-LINK VERSION)
 // ==========================================
 function initPortfolify() {
 
@@ -55,7 +55,6 @@ function initPortfolify() {
   const photoInput = document.getElementById('photoInput');
   const demoBtn = document.getElementById('demoBtn');
   const downloadHtmlBtn = document.getElementById('downloadHtmlBtn');
-  const browserAddressBar = document.getElementById('browserAddressBar');
   const copyToast = document.getElementById('copyToast');
 
   const fresherPresetBtn = document.getElementById('fresherPresetBtn');
@@ -98,56 +97,6 @@ function initPortfolify() {
 
   let certificateDocSrc = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=700&q=80';
 
-  // 🔒 UTF-8 Safe Base64 Helpers
-  function utoa(str) {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-      return String.fromCharCode('0x' + p1);
-    }));
-  }
-
-  function atou(str) {
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-  }
-
-  // 🔗 URL HASH DECODER (Supports Short & Long Keys)
-  function loadDataFromUrl() {
-    const hash = window.location.hash;
-    if (hash && hash.includes('#data=')) {
-      try {
-        const base64Data = hash.split('#data=')[1];
-        const jsonString = atou(base64Data);
-        const data = JSON.parse(jsonString);
-
-        if (nameInput) nameInput.value = data.n || data.name || '';
-        if (roleInput) roleInput.value = data.r || data.role || '';
-        if (bioInput) bioInput.value = data.b || data.bio || '';
-        if (emailInput) emailInput.value = data.e || data.email || '';
-        if (phoneInput) phoneInput.value = data.p || data.phone || '';
-        if (linkedinInput) linkedinInput.value = data.l || data.linkedin || '';
-        if (githubInput) githubInput.value = data.g || data.github || '';
-        if (skillsInput) skillsInput.value = data.s || data.skills || '';
-        if (data.pr || data.projects) projects = data.pr || data.projects;
-        if (certInput) certInput.value = data.ct || data.certTitle || '';
-        if (certIssuerInput) certIssuerInput.value = data.ci || data.certIssuer || '';
-
-        if (welcomeModal) {
-          welcomeModal.classList.add('hidden');
-        }
-
-        document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
-        renderProjectForms();
-        renderPreviewProjects();
-        renderSkills();
-        return true;
-      } catch (e) {
-        console.error('Failed to load portfolio from URL data', e);
-      }
-    }
-    return false;
-  }
-
   // ⚡ SMART PRESETS (AVCOE & ML Profiles)
   if (fresherPresetBtn) {
     fresherPresetBtn.addEventListener('click', () => {
@@ -168,16 +117,16 @@ function initPortfolify() {
         {
           id: 1,
           title: 'Portfolify - Developer Portfolio',
-          desc: 'Built a custom responsive portfolio generator with local storage and shareable URL hashing.',
+          desc: 'Built a custom responsive portfolio generator with instant HTML export.',
           tech: 'JavaScript, HTML5, CSS3',
           demoUrl: 'https://vasaikarkaran-dot.github.io/portfolify-dev.netlify.app/',
           githubUrl: 'https://github.com/vasaikarkaran-dot/portfolify-dev.netlify.app',
           image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
         }
       ];
+      document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderProjectForms();
       renderPreviewProjects();
-      document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderSkills();
       updateProgress();
     });
@@ -209,9 +158,9 @@ function initPortfolify() {
           image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80'
         }
       ];
+      document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderProjectForms();
       renderPreviewProjects();
-      document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderSkills();
       updateProgress();
     });
@@ -270,6 +219,7 @@ function initPortfolify() {
     });
   }
 
+  // Projects State
   let projects = [
     {
       id: 1,
@@ -504,8 +454,8 @@ function initPortfolify() {
   if (eduYearInput && previewEduYear) eduYearInput.addEventListener('input', () => { previewEduYear.textContent = eduYearInput.value.trim() || 'Year'; });
   if (eduCollegeInput && previewEduCollege) { eduCollegeInput.addEventListener('input', () => { previewEduCollege.textContent = eduCollegeInput.value.trim() || 'College'; updateProgress(); }); }
   if (expRoleInput && previewExpRole) { expRoleInput.addEventListener('input', () => { previewExpRole.textContent = expRoleInput.value.trim() || 'Role'; updateProgress(); }); }
-  if (expOrgInput && previewExpOrg) expOrgInput.addEventListener('input', () => { previewExpOrg.textContent = expOrgInput.value.trim() || 'Org'; });
-  if (expDescInput && previewExpDesc) expDescInput.addEventListener('input', () => { previewExpDesc.textContent = expDescInput.value.trim() || 'Desc'; });
+  if (expOrgInput && previewExpOrg) { expOrgInput.addEventListener('input', () => { previewExpOrg.textContent = expOrgInput.value.trim() || 'Org'; }); }
+  if (expDescInput && previewExpDesc) { expDescInput.addEventListener('input', () => { previewExpDesc.textContent = expDescInput.value.trim() || 'Desc'; }); }
 
   if (photoInput && previewPhoto) {
     photoInput.addEventListener('change', (e) => {
@@ -514,43 +464,6 @@ function initPortfolify() {
         const reader = new FileReader();
         reader.onload = (event) => { previewPhoto.src = event.target.result; updateProgress(); };
         reader.readAsDataURL(file);
-      }
-    });
-  }
-
-  // 🔗 COMPRESSED SHAREABLE LINK GENERATOR (Short Keys)
-  if (browserAddressBar && copyToast && previewUrl) {
-    browserAddressBar.addEventListener('click', () => {
-      try {
-        const portfolioData = {
-          n: nameInput ? nameInput.value : '',
-          r: roleInput ? roleInput.value : '',
-          b: bioInput ? bioInput.value : '',
-          e: emailInput ? emailInput.value : '',
-          p: phoneInput ? phoneInput.value : '',
-          l: linkedinInput ? linkedinInput.value : '',
-          g: githubInput ? githubInput.value : '',
-          s: skillsInput ? skillsInput.value : '',
-          pr: projects,
-          ct: certInput ? certInput.value : '',
-          ci: certIssuerInput ? certIssuerInput.value : ''
-        };
-
-        const jsonString = JSON.stringify(portfolioData);
-        const base64Data = utoa(jsonString);
-        const currentBaseUrl = window.location.href.split('#')[0];
-        const shareableLink = `${currentBaseUrl}#data=${base64Data}`;
-
-        previewUrl.textContent = shareableLink;
-        window.location.hash = `data=${base64Data}`;
-
-        navigator.clipboard.writeText(shareableLink).then(() => {
-          copyToast.textContent = 'Optimized shorter shareable link copied!';
-          copyToast.classList.add('show');
-          setTimeout(() => copyToast.classList.remove('show'), 2000);
-        });
-      } catch (err) {
-        console.error('Error generating link:', err);
       }
     });
   }
@@ -567,6 +480,7 @@ function initPortfolify() {
       if (emailInput) emailInput.value = 'karan@domain.com';
       if (phoneInput) phoneInput.value = '+91 98765 43210';
       if (skillsInput) skillsInput.value = 'Python, Siemens PLC, Allen-Bradley PLC, C++, HTML5, CSS3';
+      
       document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderSkills();
     });
@@ -588,14 +502,11 @@ function initPortfolify() {
     });
   }
 
-  // Check if URL has hash data. If NOT, clear form fields so they are blank!
-  const hasLoadedFromUrl = loadDataFromUrl();
-  if (!hasLoadedFromUrl) {
-    document.querySelectorAll('input:not([type="file"]), textarea').forEach(el => {
-      el.value = '';
-    });
-    projects = [{ id: 1, title: '', desc: '', tech: '', demoUrl: '', githubUrl: '', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80' }];
-  }
+  // Fresh load blank fields initialization
+  document.querySelectorAll('input:not([type="file"]), textarea').forEach(el => {
+    el.value = '';
+  });
+  projects = [{ id: 1, title: '', desc: '', tech: '', demoUrl: '', githubUrl: '', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80' }];
 
   renderProjectForms();
   renderPreviewProjects();
