@@ -21,6 +21,119 @@ body {
 }
 
 /* ==========================================================================
+   3D WELCOME POPUP OVERLAY
+   ========================================================================== */
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(3, 7, 18, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  perspective: 1000px;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.welcome-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-card-3d {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15);
+  transform: rotateX(4deg) translateZ(20px);
+  animation: modalFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes modalFloat {
+  0% { transform: translateY(0px) rotateX(4deg); }
+  100% { transform: translateY(-8px) rotateX(2deg); }
+}
+
+.welcome-badge {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.welcome-card-3d h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #f8fafc;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.welcome-card-3d p {
+  font-size: 13.5px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.welcome-features {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.welcome-features span {
+  font-size: 11.5px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #cbd5e1;
+}
+
+.welcome-btn {
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+  color: #030712;
+  font-size: 14px;
+  font-weight: 800;
+  border: none;
+  padding: 13px 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.welcome-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+}
+
+/* Mobile Switch Bar (Hidden on Desktop) */
+.mobile-switch-bar {
+  display: none;
+}
+
+/* ==========================================================================
    LEFT SIDE: FORM EDITOR PANEL
    ========================================================================== */
 .editor-panel {
@@ -97,7 +210,7 @@ body {
 
 .meter-fill {
   height: 100%;
-  width: 30%;
+  width: 10%;
   background: linear-gradient(90deg, #38bdf8, #6366f1);
   border-radius: 10px;
   transition: width 0.3s ease;
@@ -583,9 +696,7 @@ input:focus, textarea:focus, select:focus {
   60% { transform: translateY(2px); }
 }
 
-/* ==========================================================================
-   MEDIA PROJECTS (WITH SCREENSHOT & ACTION BUTTONS)
-   ========================================================================== */
+/* MEDIA PROJECTS */
 .projects-grid {
   display: flex;
   flex-direction: column;
@@ -766,8 +877,6 @@ input:focus, textarea:focus, select:focus {
 /* ==========================================================================
    TOP 10 ELITE CURATED THEMES
    ========================================================================== */
-
-/* 1. ▲ Vercel Obsidian (Default) */
 .theme-vercel { background: #000000; color: #ededed; }
 .theme-vercel .badge-role, .theme-vercel .project-status { background: #171717; color: #ffffff; border: 1px solid #2e2e2e; }
 .theme-vercel .connect-action, .theme-vercel .proj-link-btn.primary { background: #ffffff; color: #000000; }
@@ -776,7 +885,6 @@ input:focus, textarea:focus, select:focus {
 .theme-vercel .tech-pill, .theme-vercel .content-box, .theme-vercel .project-entry, .theme-vercel .cert-block, .theme-vercel .footer-banner, .theme-vercel .stat-card { background: #0a0a0a; border-color: #1f1f1f; }
 .theme-vercel .hero-links a { color: #ffffff; }
 
-/* 2. ⚡ Supabase Emerald */
 .theme-supabase { background: #1c1c1c; color: #ededed; }
 .theme-supabase .badge-role, .theme-supabase .project-status, .theme-supabase .stat-number, .theme-supabase .sub-badge, .theme-supabase .hero-links a { color: #3ecf8e; }
 .theme-supabase .badge-role, .theme-supabase .project-status { background: rgba(62, 207, 142, 0.12); }
@@ -784,7 +892,6 @@ input:focus, textarea:focus, select:focus {
 .theme-supabase .proj-link-btn.secondary { background: #242424; color: #3ecf8e; border: 1px solid #333; }
 .theme-supabase .tech-pill, .theme-supabase .content-box, .theme-supabase .project-entry, .theme-supabase .cert-block, .theme-supabase .footer-banner, .theme-supabase .stat-card { background: #171717; border-color: #2e2e2e; }
 
-/* 3. 🔮 Linear Dark Violet */
 .theme-linear { background: #0f1015; color: #d0d6e0; }
 .theme-linear .badge-role { background: rgba(94, 106, 210, 0.15); color: #8b95f6; }
 .theme-linear .project-status, .theme-linear .stat-number, .theme-linear .sub-badge { color: #8b95f6; }
@@ -792,7 +899,6 @@ input:focus, textarea:focus, select:focus {
 .theme-linear .proj-link-btn.secondary { background: #1c1d25; color: #d0d6e0; border: 1px solid #2a2c38; }
 .theme-linear .tech-pill, .theme-linear .content-box, .theme-linear .project-entry, .theme-linear .cert-block, .theme-linear .footer-banner, .theme-linear .stat-card { background: #14151b; border-color: #22242d; }
 
-/* 4. 🐙 GitHub Pro Dark */
 .theme-github-dark { background: #0d1117; color: #c9d1d9; }
 .theme-github-dark .badge-role, .theme-github-dark .project-status, .theme-github-dark .stat-number, .theme-github-dark .sub-badge, .theme-github-dark .hero-links a { color: #58a6ff; }
 .theme-github-dark .badge-role, .theme-github-dark .project-status { background: rgba(56, 139, 253, 0.15); }
@@ -800,7 +906,6 @@ input:focus, textarea:focus, select:focus {
 .theme-github-dark .proj-link-btn.secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
 .theme-github-dark .tech-pill, .theme-github-dark .content-box, .theme-github-dark .project-entry, .theme-github-dark .cert-block, .theme-github-dark .footer-banner, .theme-github-dark .stat-card { background: #161b22; border-color: #30363d; }
 
-/* 5. 🧛 Dracula Official */
 .theme-dracula { background: #282a36; color: #f8f8f2; }
 .theme-dracula .badge-role, .theme-dracula .project-status, .theme-dracula .stat-number, .theme-dracula .sub-badge { color: #50fa7b; }
 .theme-dracula .hero-links a { color: #8be9fd; }
@@ -808,7 +913,6 @@ input:focus, textarea:focus, select:focus {
 .theme-dracula .proj-link-btn.secondary { background: #343746; color: #f8f8f2; border: 1px solid #44475a; }
 .theme-dracula .tech-pill, .theme-dracula .content-box, .theme-dracula .project-entry, .theme-dracula .cert-block, .theme-dracula .footer-banner, .theme-dracula .stat-card { background: #1e1f29; border-color: #44475a; }
 
-/* 6. ☕ Catppuccin Mocha */
 .theme-catppuccin { background: #1e1e2e; color: #cdd6f4; }
 .theme-catppuccin .badge-role, .theme-catppuccin .project-status, .theme-catppuccin .stat-number, .theme-catppuccin .sub-badge { color: #cba6f7; }
 .theme-catppuccin .hero-links a { color: #89b4fa; }
@@ -816,21 +920,18 @@ input:focus, textarea:focus, select:focus {
 .theme-catppuccin .proj-link-btn.secondary { background: #252538; color: #cdd6f4; border: 1px solid #313244; }
 .theme-catppuccin .tech-pill, .theme-catppuccin .content-box, .theme-catppuccin .project-entry, .theme-catppuccin .cert-block, .theme-catppuccin .footer-banner, .theme-catppuccin .stat-card { background: #181825; border-color: #313244; }
 
-/* 7. 🌐 Cyberpunk Neon */
 .theme-cyber { background: #050508; color: #e2e8f0; }
 .theme-cyber .badge-role, .theme-cyber .project-status, .theme-cyber .stat-number, .theme-cyber .sub-badge, .theme-cyber .hero-links a { color: #00f0ff; }
 .theme-cyber .connect-action, .theme-cyber .proj-link-btn.primary { background: #ff0055; color: #ffffff; }
 .theme-cyber .proj-link-btn.secondary { background: #12131f; color: #00f0ff; border: 1px solid #00f0ff; }
 .theme-cyber .tech-pill, .theme-cyber .content-box, .theme-cyber .project-entry, .theme-cyber .cert-block, .theme-cyber .footer-banner, .theme-cyber .stat-card { background: #0c0d14; border-color: #1f2233; }
 
-/* 8. 🌊 Tailwind Teal */
 .theme-tailwind { background: #082f49; color: #f0f9ff; }
 .theme-tailwind .badge-role, .theme-tailwind .project-status, .theme-tailwind .stat-number, .theme-tailwind .sub-badge, .theme-tailwind .hero-links a { color: #38bdf8; }
 .theme-tailwind .connect-action, .theme-tailwind .proj-link-btn.primary { background: #38bdf8; color: #0c4a6e; }
 .theme-tailwind .proj-link-btn.secondary { background: #0f3d5e; color: #f0f9ff; border: 1px solid #075985; }
 .theme-tailwind .tech-pill, .theme-tailwind .content-box, .theme-tailwind .project-entry, .theme-tailwind .cert-block, .theme-tailwind .footer-banner, .theme-tailwind .stat-card { background: #0c4a6e; border-color: #075985; }
 
-/* 9. 💳 Stripe Executive Light */
 .theme-stripe { background: #ffffff; color: #0f172a; }
 .theme-stripe .hero-text h1, .theme-stripe .box-top h4, .theme-stripe .project-entry h4, .theme-stripe .footer-banner h4 { color: #0f172a; }
 .theme-stripe .hero-text p, .theme-stripe .box-sub, .theme-stripe .project-entry p, .theme-stripe .footer-banner p { color: #475569; }
@@ -842,7 +943,6 @@ input:focus, textarea:focus, select:focus {
 .theme-stripe .connect-action, .theme-stripe .proj-link-btn.primary { background: #0284c7; color: #ffffff; }
 .theme-stripe .proj-link-btn.secondary { background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; }
 
-/* 10. ⌘ Raycast Minimalist */
 .theme-raycast { background: #f4f4f5; color: #18181b; }
 .theme-raycast .hero-text h1, .theme-raycast .box-top h4, .theme-raycast .project-entry h4, .theme-raycast .footer-banner h4 { color: #18181b; }
 .theme-raycast .hero-text p, .theme-raycast .box-sub, .theme-raycast .project-entry p, .theme-raycast .footer-banner p { color: #52525b; }
@@ -853,19 +953,104 @@ input:focus, textarea:focus, select:focus {
 .theme-raycast .proj-link-btn.secondary { background: #ffffff; color: #18181b; border: 1px solid #d4d4d8; }
 
 /* ==========================================================================
-   PRINT / PDF MULTI-PAGE EXPORT
+   MOBILE & RESPONSIVE DESIGN (FOR PHONES & TABLETS)
    ========================================================================== */
+@media (max-width: 900px) {
+  body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .mobile-switch-bar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #0b0f19;
+    padding: 8px 12px;
+    border-bottom: 1px solid #1e293b;
+    gap: 8px;
+  }
+
+  .m-switch-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    background: #131927;
+    border: 1px solid #1e293b;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .m-switch-btn.active {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+  }
+
+  .app-layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .editor-panel {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    overflow-y: visible;
+    border-right: none;
+    padding: 18px;
+  }
+
+  .preview-panel {
+    width: 100%;
+    padding: 12px;
+    display: none; /* Controlled by mobile switcher */
+  }
+
+  .preview-panel.mobile-visible {
+    display: flex;
+  }
+
+  .editor-panel.mobile-hidden {
+    display: none;
+  }
+
+  .browser-window {
+    height: 85vh;
+  }
+
+  .portfolio-page {
+    padding: 24px 18px;
+  }
+
+  .hero-identity {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .two-col-grid {
+    flex-direction: column;
+  }
+
+  .stats-strip {
+    flex-direction: column;
+  }
+
+  .welcome-card-3d {
+    padding: 26px 20px;
+  }
+}
+
+/* PRINT */
 @media print {
   body { background: white !important; }
-  .editor-panel, .browser-bar, .scroll-down-hint, .page-nav-pills, .proj-link-btn { display: none !important; }
-  .preview-panel { padding: 0 !important; background: white !important; }
-  .browser-window {
-    box-shadow: none !important;
-    border: none !important;
-    max-width: 100% !important;
-    height: auto !important;
-    background: white !important;
-  }
+  .editor-panel, .browser-bar, .scroll-down-hint, .page-nav-pills, .proj-link-btn, .welcome-overlay, .mobile-switch-bar { display: none !important; }
+  .preview-panel { padding: 0 !important; background: white !important; display: block !important; }
+  .browser-window { box-shadow: none !important; border: none !important; max-width: 100% !important; height: auto !important; background: white !important; }
   .browser-content { padding: 0 !important; color: black !important; background: white !important; overflow: visible !important; }
   .portfolio-page { padding: 24px 0 !important; min-height: auto !important; }
   .page-two { page-break-before: always; border-top: none !important; }

@@ -1,6 +1,14 @@
 // ==========================================
 // 1. SELECT DOM ELEMENTS
 // ==========================================
+const welcomeModal = document.getElementById('welcomeModal');
+const startStudioBtn = document.getElementById('startStudioBtn');
+
+const toggleEditorBtn = document.getElementById('toggleEditorBtn');
+const togglePreviewBtn = document.getElementById('togglePreviewBtn');
+const editorPanel = document.getElementById('editorPanel');
+const previewPanel = document.getElementById('previewPanel');
+
 const nameInput = document.getElementById('nameInput');
 const roleInput = document.getElementById('roleInput');
 const bioInput = document.getElementById('bioInput');
@@ -66,17 +74,40 @@ const meterFill = document.getElementById('meterFill');
 const meterPercent = document.getElementById('meterPercent');
 
 // ==========================================
-// 2. DYNAMIC PROJECTS STATE WITH PHOTOS & MEDIA LINKS
+// 2. 3D WELCOME POPUP & MOBILE SWITCHER
+// ==========================================
+startStudioBtn.addEventListener('click', () => {
+  welcomeModal.classList.add('hidden');
+});
+
+// Mobile Switcher Logic
+if (toggleEditorBtn && togglePreviewBtn) {
+  toggleEditorBtn.addEventListener('click', () => {
+    toggleEditorBtn.classList.add('active');
+    togglePreviewBtn.classList.remove('active');
+    editorPanel.classList.remove('mobile-hidden');
+    previewPanel.classList.remove('mobile-visible');
+  });
+
+  togglePreviewBtn.addEventListener('click', () => {
+    togglePreviewBtn.classList.add('active');
+    toggleEditorBtn.classList.remove('active');
+    editorPanel.classList.add('mobile-hidden');
+    previewPanel.classList.add('mobile-visible');
+  });
+}
+
+// ==========================================
+// 3. DYNAMIC PROJECTS STATE & MEDIA HANDLERS
 // ==========================================
 let projects = [
   {
     id: 1,
-    title: 'Portfolio Studio Platform',
-    desc: 'Interactive client-side web application enabling students to construct and export production-ready personal portfolios.',
+    title: 'Featured Web Project',
+    desc: 'Interactive software system designed to solve campus scheduling or developer portfolio creation with clean client-side architecture.',
     tech: 'JavaScript, CSS Architecture, DOM API',
     demoUrl: 'https://example.com/demo',
-    githubUrl: 'https://github.com/example/portfolio-studio',
-    videoUrl: 'https://youtube.com',
+    githubUrl: 'https://github.com/example/project',
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
   }
 ];
@@ -96,7 +127,7 @@ function renderProjectForms() {
       </div>
       <div class="form-group">
         <label>Project Title</label>
-        <input type="text" class="proj-title" value="${proj.title}" placeholder="e.g. Campus Management Engine">
+        <input type="text" class="proj-title" value="${proj.title}" placeholder="e.g. Distributed Task Scheduler">
       </div>
       <div class="form-group">
         <label>Project Screenshot / Image</label>
@@ -118,11 +149,10 @@ function renderProjectForms() {
       </div>
       <div class="form-group">
         <label>Tech Stack Tags (Comma-separated)</label>
-        <input type="text" class="proj-tech" value="${proj.tech}" placeholder="e.g. Java, Spring Boot, MySQL">
+        <input type="text" class="proj-tech" value="${proj.tech}" placeholder="e.g. Java, Spring Boot, PostgreSQL">
       </div>
     `;
 
-    // Bind text inputs
     card.querySelector('.proj-title').addEventListener('input', (e) => {
       proj.title = e.target.value;
       renderPreviewProjects();
@@ -148,7 +178,6 @@ function renderProjectForms() {
       renderPreviewProjects();
     });
 
-    // Image Upload Handler for Project
     const imageInput = card.querySelector('.proj-image-input');
     imageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -162,7 +191,6 @@ function renderProjectForms() {
       }
     });
 
-    // Delete Button
     if (projects.length > 1) {
       card.querySelector('.delete-proj-btn').addEventListener('click', () => {
         projects = projects.filter(p => p.id !== proj.id);
@@ -225,7 +253,7 @@ addProjectBtn.addEventListener('click', () => {
 });
 
 // ==========================================
-// 3. AUTO CAPITALIZE TITLE CASE
+// 4. AUTO CAPITALIZE TITLE CASE
 // ==========================================
 function toTitleCase(str) {
   return str.replace(/\b\w/g, char => char.toUpperCase());
@@ -240,7 +268,7 @@ document.querySelectorAll('[data-capitalize="words"]').forEach(input => {
 });
 
 // ==========================================
-// 4. PROFILE STRENGTH METER
+// 5. PROFILE STRENGTH METER
 // ==========================================
 const trackedInputs = [
   nameInput, roleInput, bioInput, emailInput, skillsInput,
@@ -263,10 +291,10 @@ function updateProgress() {
 }
 
 // ==========================================
-// 5. REAL-TIME INPUT BINDINGS
+// 6. REAL-TIME INPUT BINDINGS
 // ==========================================
 nameInput.addEventListener('input', () => {
-  const val = nameInput.value.trim() || 'Karan Vasaikar';
+  const val = nameInput.value.trim() || 'Your Full Name';
   previewName.textContent = val;
   const slug = val.toLowerCase().replace(/[^a-z0-9]/g, '-');
   previewUrl.textContent = `https://portfolio.dev/${slug}`;
@@ -274,30 +302,30 @@ nameInput.addEventListener('input', () => {
 });
 
 roleInput.addEventListener('input', () => {
-  previewRole.textContent = roleInput.value.trim() || 'Computer Engineering Student';
+  previewRole.textContent = roleInput.value.trim() || 'Student Developer';
   updateProgress();
 });
 
 bioInput.addEventListener('input', () => {
-  previewBio.textContent = bioInput.value.trim() || 'Tell recruiters about yourself...';
+  previewBio.textContent = bioInput.value.trim() || 'Write a short introduction in the form to describe your background, technical interests, and projects.';
   updateProgress();
 });
 
 statProjectsInput.addEventListener('input', () => {
-  previewStatProjects.textContent = statProjectsInput.value.trim() || '15+';
+  previewStatProjects.textContent = statProjectsInput.value.trim() || '5+';
 });
 
 statCommitsInput.addEventListener('input', () => {
-  previewStatCommits.textContent = statCommitsInput.value.trim() || '450+';
+  previewStatCommits.textContent = statCommitsInput.value.trim() || '250+';
 });
 
 statProblemsInput.addEventListener('input', () => {
-  previewStatProblems.textContent = statProblemsInput.value.trim() || '200+';
+  previewStatProblems.textContent = statProblemsInput.value.trim() || '100+';
 });
 
 emailInput.addEventListener('input', () => {
   const val = emailInput.value.trim();
-  previewEmail.textContent = val ? `📧 ${val}` : '📧 student@example.com';
+  previewEmail.textContent = val ? `📧 ${val}` : '📧 student@domain.com';
   previewEmail.href = val ? `mailto:${val}` : '#';
   connectBtn.href = val ? `mailto:${val}` : '#';
   updateProgress();
@@ -305,7 +333,7 @@ emailInput.addEventListener('input', () => {
 
 phoneInput.addEventListener('input', () => {
   const val = phoneInput.value.trim();
-  previewPhone.textContent = val ? `📞 ${val}` : '📞 +91 98765 43210';
+  previewPhone.textContent = val ? `📞 ${val}` : '📞 +91 00000 00000';
 });
 
 linkedinInput.addEventListener('input', () => {
@@ -323,6 +351,7 @@ skillsInput.addEventListener('input', () => {
   if (list.length === 0) {
     previewSkills.innerHTML = `
       <span class="tech-pill">Java</span>
+      <span class="tech-pill">Python</span>
       <span class="tech-pill">HTML5</span>
       <span class="tech-pill">CSS3</span>
       <span class="tech-pill">JavaScript</span>
@@ -339,21 +368,21 @@ skillsInput.addEventListener('input', () => {
 });
 
 eduDegreeInput.addEventListener('input', () => {
-  previewEduDegree.textContent = eduDegreeInput.value.trim() || 'Degree / Major';
+  previewEduDegree.textContent = eduDegreeInput.value.trim() || 'Degree & Specialization';
   updateProgress();
 });
 
 eduYearInput.addEventListener('input', () => {
-  previewEduYear.textContent = eduYearInput.value.trim() || '2026 | CGPA: 8.9';
+  previewEduYear.textContent = eduYearInput.value.trim() || 'Graduation Year';
 });
 
 eduCollegeInput.addEventListener('input', () => {
-  previewEduCollege.textContent = eduCollegeInput.value.trim() || 'College / University';
+  previewEduCollege.textContent = eduCollegeInput.value.trim() || 'College or University Name';
   updateProgress();
 });
 
 expRoleInput.addEventListener('input', () => {
-  previewExpRole.textContent = expRoleInput.value.trim() || 'Experience / Role';
+  previewExpRole.textContent = expRoleInput.value.trim() || 'Role or Internship';
   updateProgress();
 });
 
@@ -362,11 +391,11 @@ expOrgInput.addEventListener('input', () => {
 });
 
 expDescInput.addEventListener('input', () => {
-  previewExpDesc.textContent = expDescInput.value.trim() || 'Brief summary of responsibilities...';
+  previewExpDesc.textContent = expDescInput.value.trim() || 'Responsibilities and achievements will display here once filled in the editor.';
 });
 
 certInput.addEventListener('input', () => {
-  previewCert.textContent = certInput.value.trim() || 'Java Full Stack Certified';
+  previewCert.textContent = certInput.value.trim() || 'Certification / Academic Award';
   updateProgress();
 });
 
@@ -386,7 +415,6 @@ photoInput.addEventListener('change', (e) => {
   }
 });
 
-// Copy URL to Clipboard Click
 browserAddressBar.addEventListener('click', () => {
   navigator.clipboard.writeText(previewUrl.textContent).then(() => {
     copyToast.classList.add('show');
@@ -395,49 +423,49 @@ browserAddressBar.addEventListener('click', () => {
 });
 
 // ==========================================
-// 6. ONE-CLICK DEMO AUTO-FILL
+// 7. GENERIC SAMPLE DATA AUTO-FILL
 // ==========================================
 demoBtn.addEventListener('click', () => {
-  nameInput.value = 'Karan Vasaikar';
-  roleInput.value = 'Computer Engineering Student & Full-Stack Developer';
-  bioInput.value = 'Passionate developer dedicated to building reliable, high-performance web systems and clean user interfaces. Always excited to solve practical problems with modern engineering tools.';
-  statProjectsInput.value = '15+';
-  statCommitsInput.value = '520+';
-  statProblemsInput.value = '240+';
+  nameInput.value = 'Jordan Lee';
+  roleInput.value = 'Computer Science Student & Full-Stack Developer';
+  bioInput.value = 'Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.';
+  statProjectsInput.value = '12+';
+  statCommitsInput.value = '380+';
+  statProblemsInput.value = '190+';
 
-  emailInput.value = 'karan@example.com';
+  emailInput.value = 'jordan.lee@university.edu';
   phoneInput.value = '+91 98765 43210';
   linkedinInput.value = 'https://linkedin.com';
   githubInput.value = 'https://github.com';
-  skillsInput.value = 'Java, Python, C++, HTML5, CSS3, JavaScript, Git, SQL, Docker';
+  skillsInput.value = 'Java, Python, C++, HTML5, CSS3, JavaScript, TypeScript, Git, SQL, Docker';
 
   eduDegreeInput.value = 'B.Tech in Computer Engineering';
-  eduYearInput.value = '2026 | CGPA: 8.9';
-  eduCollegeInput.value = 'Department of Computer Engineering';
+  eduYearInput.value = 'Class of 2026 | CGPA: 8.8';
+  eduCollegeInput.value = 'Institute of Technology & Engineering';
 
-  expRoleInput.value = 'Full-Stack Engineering Intern';
-  expOrgInput.value = 'Apex Software Labs';
-  expDescInput.value = 'Engineered responsive dashboard components, optimized API latency by 25%, and integrated unit tests.';
+  expRoleInput.value = 'Software Engineering Intern';
+  expOrgInput.value = 'Tech Innovations Lab';
+  expDescInput.value = 'Engineered responsive dashboard components, optimized API latency by 25%, and integrated automated unit tests.';
 
-  certInput.value = 'Java Full Stack Certified - HackerRank / Oracle';
+  certInput.value = 'Full-Stack Web Development Certified - Meta / Coursera';
 
   projects = [
     {
       id: 1,
-      title: 'Portfolio Studio Platform',
-      desc: 'Engineered a client-side portfolio creation platform enabling students to generate and export production-ready websites in under two minutes.',
-      tech: 'JavaScript, CSS Architecture, DOM API',
+      title: 'Cloud Document Manager',
+      desc: 'Scalable web service providing real-time text synchronization, encrypted cloud storage, and team permission controls.',
+      tech: 'TypeScript, React, Node.js, WebSockets',
       demoUrl: 'https://example.com/demo',
-      githubUrl: 'https://github.com/example/portfolio-studio',
+      githubUrl: 'https://github.com/example/cloud-docs',
       image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
     },
     {
       id: 2,
-      title: 'Campus Management Engine',
-      desc: 'Designed a robust data management portal for course registrations, grading automation, and real-time attendance analytics.',
-      tech: 'Java, MySQL, Clean Architecture',
+      title: 'Autonomous Campus Transit Bot',
+      desc: 'Pathfinding simulation engine incorporating Dijkstra and A* path algorithms with interactive graphical analytics.',
+      tech: 'Java, JavaFX, Data Structures, OOP',
       demoUrl: 'https://example.com/live',
-      githubUrl: 'https://github.com/example/campus-portal',
+      githubUrl: 'https://github.com/example/transit-bot',
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80'
     }
   ];
@@ -449,7 +477,7 @@ demoBtn.addEventListener('click', () => {
 });
 
 // ==========================================
-// 7. DOWNLOAD STANDALONE HTML FILE
+// 8. DOWNLOAD STANDALONE HTML FILE
 // ==========================================
 downloadHtmlBtn.addEventListener('click', () => {
   let embeddedCSS = '';
@@ -485,6 +513,6 @@ downloadHtmlBtn.addEventListener('click', () => {
   downloadLink.click();
 });
 
-// Initial Setup
+// Initial Setup Call
 renderProjectForms();
 renderPreviewProjects();

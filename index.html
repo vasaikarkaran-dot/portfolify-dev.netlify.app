@@ -8,16 +8,39 @@
 </head>
 <body>
 
+  <!-- ================= 3D WELCOME POPUP MODAL ================= -->
+  <div id="welcomeModal" class="welcome-overlay">
+    <div class="welcome-card-3d">
+      <div class="welcome-badge">PORTFOLIO STUDIO v2.0</div>
+      <h2>Craft Your Standout Developer Portfolio</h2>
+      <p>A zero-setup, multi-page portfolio generator tailored for engineering students. Fill out your details, attach project screenshots, switch themes, and export production-ready code.</p>
+      
+      <div class="welcome-features">
+        <span>⚡ 10 Elite Themes</span>
+        <span>📁 Multi-Project Media</span>
+        <span>📄 Instant PDF & HTML</span>
+      </div>
+
+      <button type="button" id="startStudioBtn" class="welcome-btn">Launch Builder →</button>
+    </div>
+  </div>
+
+  <!-- Mobile Viewport Switcher -->
+  <div class="mobile-switch-bar">
+    <button type="button" id="toggleEditorBtn" class="m-switch-btn active">✏️ Edit Details</button>
+    <button type="button" id="togglePreviewBtn" class="m-switch-btn">👁️ Live Preview</button>
+  </div>
+
   <div class="app-layout">
     
     <!-- LEFT PANEL: FORM EDITOR -->
-    <aside class="editor-panel">
+    <aside class="editor-panel" id="editorPanel">
       <div class="panel-header">
         <div>
           <h2>Portfolio Studio</h2>
           <p class="panel-subtitle">Create a complete multi-section developer showcase</p>
         </div>
-        <button type="button" id="demoBtn" class="pill-btn secondary">⚡ Fill Full Demo</button>
+        <button type="button" id="demoBtn" class="pill-btn secondary">⚡ Sample Data</button>
       </div>
 
       <!-- Completeness Meter -->
@@ -65,43 +88,43 @@
 
         <div class="form-group">
           <label>Full Name</label>
-          <input type="text" id="nameInput" placeholder="e.g. Karan Vasaikar" data-capitalize="words">
+          <input type="text" id="nameInput" placeholder="Enter your full name" data-capitalize="words">
         </div>
 
         <div class="form-group">
           <label>Headline / Role</label>
-          <input type="text" id="roleInput" placeholder="e.g. Computer Engineering Student & Full-Stack Developer">
+          <input type="text" id="roleInput" placeholder="e.g. Computer Science Student & Frontend Developer">
         </div>
 
         <div class="form-group">
           <label>About Me (Bio)</label>
-          <textarea id="bioInput" rows="3" placeholder="Tell recruiters about your engineering journey, software passions, and goals..."></textarea>
+          <textarea id="bioInput" rows="3" placeholder="Write a brief overview of your background, engineering interests, and goals..."></textarea>
         </div>
 
         <!-- Quick Numerical Highlights -->
         <div class="form-row">
           <div class="form-group third">
             <label>Completed Projects</label>
-            <input type="text" id="statProjectsInput" placeholder="e.g. 15+">
+            <input type="text" id="statProjectsInput" placeholder="e.g. 5+">
           </div>
           <div class="form-group third">
             <label>GitHub Commits</label>
-            <input type="text" id="statCommitsInput" placeholder="e.g. 450+">
+            <input type="text" id="statCommitsInput" placeholder="e.g. 250+">
           </div>
           <div class="form-group third">
-            <label>LeetCode Solved</label>
-            <input type="text" id="statProblemsInput" placeholder="e.g. 200+">
+            <label>Problems Solved</label>
+            <input type="text" id="statProblemsInput" placeholder="e.g. 100+">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group half">
             <label>Email Address</label>
-            <input type="email" id="emailInput" placeholder="student@example.com">
+            <input type="email" id="emailInput" placeholder="name@domain.com">
           </div>
           <div class="form-group half">
             <label>Phone / WhatsApp</label>
-            <input type="tel" id="phoneInput" placeholder="+91 9876543210">
+            <input type="tel" id="phoneInput" placeholder="+91 00000 00000">
           </div>
         </div>
 
@@ -118,7 +141,7 @@
 
         <div class="form-group">
           <label>Technical Stack (Comma-separated)</label>
-          <input type="text" id="skillsInput" placeholder="e.g. Java, Python, HTML5, CSS3, JavaScript, Git, SQL, Docker" data-capitalize="words">
+          <input type="text" id="skillsInput" placeholder="e.g. Java, Python, HTML5, CSS3, JavaScript, Git, SQL" data-capitalize="words">
         </div>
 
         <!-- Education -->
@@ -128,31 +151,31 @@
             <input type="text" id="eduDegreeInput" placeholder="e.g. B.Tech Computer Engineering" data-capitalize="words">
           </div>
           <div class="form-group half">
-            <label>Passing Year / CGPA</label>
-            <input type="text" id="eduYearInput" placeholder="e.g. 2026 | CGPA: 8.9">
+            <label>Passing Year / Grade</label>
+            <input type="text" id="eduYearInput" placeholder="e.g. Class of 2026 | CGPA: 8.5">
           </div>
         </div>
 
         <div class="form-group">
           <label>College / University</label>
-          <input type="text" id="eduCollegeInput" placeholder="e.g. Department of Computer Engineering" data-capitalize="words">
+          <input type="text" id="eduCollegeInput" placeholder="e.g. Department of Engineering & Technology" data-capitalize="words">
         </div>
 
-        <!-- Experience / Hackathon -->
+        <!-- Experience / Role -->
         <div class="form-row">
           <div class="form-group half">
-            <label>Experience / Hackathon Title</label>
-            <input type="text" id="expRoleInput" placeholder="e.g. Web Development Intern / Hackathon Finalist" data-capitalize="words">
+            <label>Role / Position</label>
+            <input type="text" id="expRoleInput" placeholder="e.g. Web Development Intern" data-capitalize="words">
           </div>
           <div class="form-group half">
-            <label>Organization / Team</label>
-            <input type="text" id="expOrgInput" placeholder="e.g. Tech Solutions Inc. / Smart India Hackathon" data-capitalize="words">
+            <label>Organization / Club</label>
+            <input type="text" id="expOrgInput" placeholder="e.g. Tech Club / Company" data-capitalize="words">
           </div>
         </div>
 
         <div class="form-group">
           <label>Experience Summary</label>
-          <textarea id="expDescInput" rows="2" placeholder="What core contributions did you make?"></textarea>
+          <textarea id="expDescInput" rows="2" placeholder="Brief summary of tasks, algorithms, or features developed..."></textarea>
         </div>
 
         <!-- Section 2: Projects with Screenshot & Demo Links -->
@@ -165,8 +188,8 @@
         <button type="button" id="addProjectBtn" class="add-proj-btn">+ Add Another Project</button>
 
         <div class="form-group" style="margin-top: 14px;">
-          <label>Key Certification / Award</label>
-          <input type="text" id="certInput" placeholder="e.g. Java Full Stack Certified - HackerRank / Oracle" data-capitalize="words">
+          <label>Key Certification / Honor</label>
+          <input type="text" id="certInput" placeholder="e.g. Java Full Stack Certified / Hackathon Winner" data-capitalize="words">
         </div>
 
         <!-- Export Buttons -->
@@ -179,7 +202,7 @@
     </aside>
 
     <!-- RIGHT PANEL: DESKTOP BROWSER PREVIEW (2-PAGE SCROLL) -->
-    <main class="preview-panel">
+    <main class="preview-panel" id="previewPanel">
       
       <div class="browser-window">
         
@@ -192,7 +215,7 @@
           </div>
           <div class="browser-address" id="browserAddressBar" title="Click to copy link">
             <span class="lock-icon">🔒</span>
-            <span id="previewUrl">https://portfolio.dev/karan-vasaikar</span>
+            <span id="previewUrl">https://portfolio.dev/your-name</span>
             <span class="copy-badge">Copy</span>
           </div>
           <div class="page-nav-pills">
@@ -214,32 +237,32 @@
                   <span class="status-indicator" title="Open to opportunities"></span>
                 </div>
                 <div class="hero-text">
-                  <div class="badge-role" id="previewRole">Computer Engineering Student</div>
-                  <h1 id="previewName">Karan Vasaikar</h1>
-                  <p id="previewBio">Passionate developer focused on building reliable, clean software systems and responsive web applications with modern architecture.</p>
+                  <div class="badge-role" id="previewRole">Student Developer</div>
+                  <h1 id="previewName">Your Full Name</h1>
+                  <p id="previewBio">Write a short introduction in the form to describe your background, technical interests, and projects.</p>
                 </div>
               </div>
 
               <!-- Quick Numerical Stat Cards -->
               <div class="stats-strip">
                 <div class="stat-card">
-                  <span class="stat-number" id="previewStatProjects">15+</span>
+                  <span class="stat-number" id="previewStatProjects">5+</span>
                   <span class="stat-label">Projects Built</span>
                 </div>
                 <div class="stat-card">
-                  <span class="stat-number" id="previewStatCommits">450+</span>
+                  <span class="stat-number" id="previewStatCommits">250+</span>
                   <span class="stat-label">GitHub Commits</span>
                 </div>
                 <div class="stat-card">
-                  <span class="stat-number" id="previewStatProblems">200+</span>
+                  <span class="stat-number" id="previewStatProblems">100+</span>
                   <span class="stat-label">Problems Solved</span>
                 </div>
               </div>
 
               <!-- Social Links Strip -->
               <div class="hero-links">
-                <a id="previewEmail" href="mailto:karan@example.com">📧 karan@example.com</a>
-                <span id="previewPhone">📞 +91 98765 43210</span>
+                <a id="previewEmail" href="mailto:student@domain.com">📧 student@domain.com</a>
+                <span id="previewPhone">📞 +91 00000 00000</span>
                 <a id="previewLinkedin" href="#" target="_blank">LinkedIn ↗</a>
                 <a id="previewGithub" href="#" target="_blank">GitHub ↗</a>
               </div>
@@ -267,22 +290,22 @@
                 <h3 class="section-heading">Education & Academics</h3>
                 <div class="content-box">
                   <div class="box-top">
-                    <h4 id="previewEduDegree">B.Tech in Computer Engineering</h4>
-                    <span class="sub-badge" id="previewEduYear">2026 | CGPA: 8.9</span>
+                    <h4 id="previewEduDegree">Degree & Specialization</h4>
+                    <span class="sub-badge" id="previewEduYear">Graduation Year</span>
                   </div>
-                  <p class="box-sub" id="previewEduCollege">Department of Computer Engineering</p>
+                  <p class="box-sub" id="previewEduCollege">College or University Name</p>
                 </div>
               </div>
 
-              <!-- Experience / Hackathon -->
+              <!-- Experience / Role -->
               <div class="page-block">
                 <h3 class="section-heading">Experience & Roles</h3>
                 <div class="content-box">
                   <div class="box-top">
-                    <h4 id="previewExpRole">Web Engineering Intern</h4>
-                    <span class="sub-badge" id="previewExpOrg">Tech Solutions Inc.</span>
+                    <h4 id="previewExpRole">Role or Internship</h4>
+                    <span class="sub-badge" id="previewExpOrg">Organization</span>
                   </div>
-                  <p class="box-sub" id="previewExpDesc">Engineered high-performance user interfaces and responsive web layouts.</p>
+                  <p class="box-sub" id="previewExpDesc">Responsibilities and achievements will display here once filled in the editor.</p>
                 </div>
               </div>
 
@@ -290,7 +313,7 @@
 
             <!-- Scroll Indicator to Page 2 -->
             <div class="scroll-down-hint">
-              <span>Scroll down to inspect full project media & demos</span>
+              <span>Scroll down to inspect featured project media & live links</span>
               <div class="scroll-arrow">↓</div>
             </div>
 
@@ -316,7 +339,7 @@
               <h3 class="section-heading">Key Credential</h3>
               <div class="cert-block">
                 <span class="cert-icon">🏅</span>
-                <span id="previewCert">Java Full Stack Certified - HackerRank / Oracle</span>
+                <span id="previewCert">Certification / Academic Award</span>
               </div>
             </div>
 
@@ -325,11 +348,11 @@
               <div class="footer-banner">
                 <div>
                   <h4>Interested in collaborating?</h4>
-                  <p>Open for full-time roles, internships, and engineering discussions.</p>
+                  <p>Open for internships, entry-level engineering roles, and open-source contributions.</p>
                 </div>
-                <a id="connectBtn" href="mailto:karan@example.com" class="connect-action">Get in Touch →</a>
+                <a id="connectBtn" href="mailto:student@domain.com" class="connect-action">Get in Touch →</a>
               </div>
-              <p class="copyright-note">Built with Portfolio Studio • Production Standard</p>
+              <p class="copyright-note">Built with Portfolio Studio • Open Engineering Standard</p>
             </footer>
 
           </section>
