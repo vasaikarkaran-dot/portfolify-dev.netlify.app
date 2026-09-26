@@ -11,12 +11,11 @@
   <!-- ================= 3D INSPIRING WELCOME POPUP MODAL ================= -->
   <div id="welcomeModal" class="welcome-overlay">
     <div class="welcome-card-3d">
-      
       <div class="glow-orb-backdrop"></div>
 
       <div class="welcome-top-meta">
         <span class="brand-pill">⚡ PORTFOLIFY</span>
-        <span class="version-pill">v2.0 PRO</span>
+        <span class="version-pill">v3.0 PRO</span>
       </div>
 
       <h1 class="welcome-headline">
@@ -29,24 +28,23 @@
         <span class="creator-name">Karan Vasaikar</span>
       </div>
 
-      <!-- INSPIRING STUDENT MESSAGE -->
       <div class="student-inspire-box">
         <p class="inspire-quote">
           "Every late-night bug you fixed, every hackathon prototype you built, and every line of code deserves more than a boring plain resume."
         </p>
         <p class="inspire-subtext">
-          Built for passionate engineering and computer science students. Turn your academic journey, coding stats, and project screenshots into a high-impact developer website that catches recruiters' attention in seconds.
+          Built for passionate engineering and computer science students. Turn your academic journey, coding stats, live projects, and verified certificates into a high-impact developer website.
         </p>
         
         <div class="inspire-highlights">
           <div class="highlight-chip"><span>🎯</span> 0% Fluff • 100% Proof</div>
-          <div class="highlight-chip"><span>📁</span> Live Media & Repos</div>
-          <div class="highlight-chip"><span>💼</span> Recruiter-Ready Flow</div>
+          <div class="highlight-chip"><span>📁</span> Media & Screenshots</div>
+          <div class="highlight-chip"><span>📜</span> Verified Certificates</div>
         </div>
       </div>
       
       <div class="welcome-features">
-        <span>▲ 10 Iconic Themes</span>
+        <span>▲ Elite Developer Themes</span>
         <span>📱 Mobile Responsive</span>
         <span>📄 Instant PDF & HTML Export</span>
       </div>
@@ -73,40 +71,38 @@
           <h2>Portfolify</h2>
           <p class="panel-subtitle">By Karan Vasaikar • Student Portfolio Generator</p>
         </div>
-        <button type="button" id="demoBtn" class="pill-btn secondary">⚡ Sample Data</button>
+        <button type="button" id="demoBtn" class="pill-btn secondary">⚡ Reset Sample</button>
       </div>
 
       <!-- Completeness Meter -->
       <div class="meter-box">
         <div class="meter-meta">
           <span>Portfolio Strength</span>
-          <span id="meterPercent">0%</span>
+          <span id="meterPercent">85%</span>
         </div>
         <div class="meter-track">
-          <div id="meterFill" class="meter-fill"></div>
+          <div id="meterFill" class="meter-fill" style="width: 85%;"></div>
         </div>
       </div>
 
       <form id="portfolioForm">
         
-        <!-- Theme & Profile Picture -->
+        <!-- Clean Native Theme Selector -->
         <div class="form-row">
           <div class="form-group half">
-            <label>Curated Elite Themes</label>
+            <label>Developer Theme Preset</label>
             <select id="themeSelect">
-              <optgroup label="🌌 Dark & Modern Tech">
+              <optgroup label="🌌 Dark & Cyber">
                 <option value="theme-vercel">▲ Vercel Obsidian (Default)</option>
                 <option value="theme-supabase">⚡ Supabase Emerald</option>
                 <option value="theme-linear">🔮 Linear Dark Violet</option>
-                <option value="theme-github-dark">🐙 GitHub Pro Dark</option>
-                <option value="theme-dracula">🧛 Dracula Official</option>
-                <option value="theme-catppuccin">☕ Catppuccin Mocha</option>
                 <option value="theme-cyber">🌐 Cyberpunk Neon</option>
+                <option value="theme-dracula">🧛 Dracula Pro</option>
+                <option value="theme-github-dark">🐙 GitHub Pro Dark</option>
                 <option value="theme-tailwind">🌊 Tailwind Teal</option>
               </optgroup>
               <optgroup label="💼 Clean & Executive">
                 <option value="theme-stripe">💳 Stripe Executive Light</option>
-                <option value="theme-raycast">⌘ Raycast Minimalist</option>
               </optgroup>
             </select>
           </div>
@@ -121,108 +117,125 @@
 
         <div class="form-group">
           <label>Full Name</label>
-          <input type="text" id="nameInput" placeholder="Enter your full name" data-capitalize="words">
+          <input type="text" id="nameInput" value="Jordan Lee" placeholder="Enter your full name" data-capitalize="words">
         </div>
 
         <div class="form-group">
           <label>Headline / Role</label>
-          <input type="text" id="roleInput" placeholder="e.g. Computer Science Student & Frontend Developer">
+          <input type="text" id="roleInput" value="Computer Science Student & Full-Stack Developer" placeholder="e.g. Computer Science Student & Frontend Developer">
         </div>
 
         <div class="form-group">
           <label>About Me (Bio)</label>
-          <textarea id="bioInput" rows="3" placeholder="Write a brief overview of your background, engineering interests, and goals..."></textarea>
+          <textarea id="bioInput" rows="3" placeholder="Write a brief overview...">Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.</textarea>
         </div>
 
         <!-- Quick Numerical Highlights -->
         <div class="form-row">
           <div class="form-group third">
             <label>Completed Projects</label>
-            <input type="text" id="statProjectsInput" placeholder="e.g. 5+">
+            <input type="text" id="statProjectsInput" value="12+" placeholder="e.g. 5+">
           </div>
           <div class="form-group third">
             <label>GitHub Commits</label>
-            <input type="text" id="statCommitsInput" placeholder="e.g. 250+">
+            <input type="text" id="statCommitsInput" value="380+" placeholder="e.g. 250+">
           </div>
           <div class="form-group third">
             <label>Problems Solved</label>
-            <input type="text" id="statProblemsInput" placeholder="e.g. 100+">
+            <input type="text" id="statProblemsInput" value="190+" placeholder="e.g. 100+">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group half">
             <label>Email Address</label>
-            <input type="email" id="emailInput" placeholder="name@domain.com">
+            <input type="email" id="emailInput" value="jordan.lee@university.edu" placeholder="name@domain.com">
           </div>
           <div class="form-group half">
             <label>Phone / WhatsApp</label>
-            <input type="tel" id="phoneInput" placeholder="+91 00000 00000">
+            <input type="tel" id="phoneInput" value="+91 98765 43210" placeholder="+91 00000 00000">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group half">
             <label>LinkedIn URL</label>
-            <input type="url" id="linkedinInput" placeholder="https://linkedin.com/in/username">
+            <input type="url" id="linkedinInput" value="https://linkedin.com" placeholder="https://linkedin.com/in/username">
           </div>
           <div class="form-group half">
             <label>GitHub URL</label>
-            <input type="url" id="githubInput" placeholder="https://github.com/username">
+            <input type="url" id="githubInput" value="https://github.com" placeholder="https://github.com/username">
           </div>
         </div>
 
         <div class="form-group">
           <label>Technical Stack (Comma-separated)</label>
-          <input type="text" id="skillsInput" placeholder="e.g. Java, Python, HTML5, CSS3, JavaScript, Git, SQL" data-capitalize="words">
+          <input type="text" id="skillsInput" value="Java, Python, C++, HTML5, CSS3, JavaScript, TypeScript, Git, SQL, Docker" placeholder="e.g. Java, Python..." data-capitalize="words">
         </div>
 
         <!-- Education -->
         <div class="form-row">
           <div class="form-group half">
             <label>Degree & Major</label>
-            <input type="text" id="eduDegreeInput" placeholder="e.g. B.Tech Computer Engineering" data-capitalize="words">
+            <input type="text" id="eduDegreeInput" value="B.Tech in Computer Engineering" placeholder="e.g. B.Tech Computer Engineering" data-capitalize="words">
           </div>
           <div class="form-group half">
             <label>Passing Year / Grade</label>
-            <input type="text" id="eduYearInput" placeholder="e.g. Class of 2026 | CGPA: 8.5">
+            <input type="text" id="eduYearInput" value="Class of 2026 | CGPA: 8.8" placeholder="e.g. Class of 2026">
           </div>
         </div>
 
         <div class="form-group">
           <label>College / University</label>
-          <input type="text" id="eduCollegeInput" placeholder="e.g. Department of Engineering & Technology" data-capitalize="words">
+          <input type="text" id="eduCollegeInput" value="Institute of Technology & Engineering" placeholder="e.g. Department of Engineering" data-capitalize="words">
         </div>
 
         <!-- Experience / Role -->
         <div class="form-row">
           <div class="form-group half">
             <label>Role / Position</label>
-            <input type="text" id="expRoleInput" placeholder="e.g. Web Development Intern" data-capitalize="words">
+            <input type="text" id="expRoleInput" value="Software Engineering Intern" placeholder="e.g. Web Development Intern" data-capitalize="words">
           </div>
           <div class="form-group half">
             <label>Organization / Club</label>
-            <input type="text" id="expOrgInput" placeholder="e.g. Tech Club / Company" data-capitalize="words">
+            <input type="text" id="expOrgInput" value="Tech Innovations Lab" placeholder="e.g. Tech Club" data-capitalize="words">
           </div>
         </div>
 
         <div class="form-group">
           <label>Experience Summary</label>
-          <textarea id="expDescInput" rows="2" placeholder="Brief summary of tasks, algorithms, or features developed..."></textarea>
+          <textarea id="expDescInput" rows="2" placeholder="Brief summary...">Engineered responsive dashboard components, optimized API latency by 25%, and integrated automated unit tests.</textarea>
         </div>
 
         <!-- Section 2: Projects with Screenshot & Demo Links -->
         <div class="section-badge">📁 Page 2: Projects (With Screenshots & Links)</div>
 
-        <div id="projectsFormList">
-          <!-- Dynamically populated in JavaScript -->
-        </div>
+        <div id="projectsFormList"></div>
 
         <button type="button" id="addProjectBtn" class="add-proj-btn">+ Add Another Project</button>
 
-        <div class="form-group" style="margin-top: 14px;">
-          <label>Key Certification / Honor</label>
-          <input type="text" id="certInput" placeholder="e.g. Java Full Stack Certified / Hackathon Winner" data-capitalize="words">
+        <!-- Section 3: Verified Certification with Document Proof -->
+        <div class="section-badge">📜 Certification & Document Proof</div>
+
+        <div class="cert-input-card">
+          <div class="form-group">
+            <label>Certification / Award Title</label>
+            <input type="text" id="certInput" value="Full-Stack Web Development Certified" placeholder="e.g. Full-Stack Java Development Certified" data-capitalize="words">
+          </div>
+          <div class="form-group">
+            <label>Issuing Organization</label>
+            <input type="text" id="certIssuerInput" value="Meta / Coursera" placeholder="e.g. Oracle / HackerRank" data-capitalize="words">
+          </div>
+          <div class="form-row">
+            <div class="form-group half">
+              <label>Certificate Image / Document</label>
+              <input type="file" id="certFileInput" accept="image/*,.pdf">
+            </div>
+            <div class="form-group half">
+              <label>Credential Verification URL</label>
+              <input type="url" id="certUrlInput" value="https://coursera.org/verify" placeholder="https://coursera.org/verify/xyz">
+            </div>
+          </div>
         </div>
 
         <!-- Export Buttons -->
@@ -248,7 +261,7 @@
           </div>
           <div class="browser-address" id="browserAddressBar" title="Click to copy link">
             <span class="lock-icon">🔒</span>
-            <span id="previewUrl">https://portfolify.me/your-name</span>
+            <span id="previewUrl">https://portfolify.me/jordan-lee</span>
             <span class="copy-badge">Copy</span>
           </div>
           <div class="page-nav-pills">
@@ -270,34 +283,34 @@
                   <span class="status-indicator" title="Open to opportunities"></span>
                 </div>
                 <div class="hero-text">
-                  <div class="badge-role" id="previewRole">Student Developer</div>
-                  <h1 id="previewName">Your Full Name</h1>
-                  <p id="previewBio">Write a short introduction in the form to describe your background, technical interests, and projects.</p>
+                  <div class="badge-role" id="previewRole">Computer Science Student & Full-Stack Developer</div>
+                  <h1 id="previewName">Jordan Lee</h1>
+                  <p id="previewBio">Undergraduate computer science student passionate about distributed systems, modern web architecture, and crafting performant user experiences with clean code.</p>
                 </div>
               </div>
 
               <!-- Quick Numerical Stat Cards -->
               <div class="stats-strip">
                 <div class="stat-card">
-                  <span class="stat-number" id="previewStatProjects">5+</span>
+                  <span class="stat-number" id="previewStatProjects">12+</span>
                   <span class="stat-label">Projects Built</span>
                 </div>
                 <div class="stat-card">
-                  <span class="stat-number" id="previewStatCommits">250+</span>
+                  <span class="stat-number" id="previewStatCommits">380+</span>
                   <span class="stat-label">GitHub Commits</span>
                 </div>
                 <div class="stat-card">
-                  <span class="stat-number" id="previewStatProblems">100+</span>
+                  <span class="stat-number" id="previewStatProblems">190+</span>
                   <span class="stat-label">Problems Solved</span>
                 </div>
               </div>
 
               <!-- Social Links Strip -->
               <div class="hero-links">
-                <a id="previewEmail" href="mailto:student@domain.com">📧 student@domain.com</a>
-                <span id="previewPhone">📞 +91 00000 00000</span>
-                <a id="previewLinkedin" href="#" target="_blank">LinkedIn ↗</a>
-                <a id="previewGithub" href="#" target="_blank">GitHub ↗</a>
+                <a id="previewEmail" href="mailto:jordan.lee@university.edu">📧 jordan.lee@university.edu</a>
+                <span id="previewPhone">📞 +91 98765 43210</span>
+                <a id="previewLinkedin" href="https://linkedin.com" target="_blank">LinkedIn ↗</a>
+                <a id="previewGithub" href="https://github.com" target="_blank">GitHub ↗</a>
               </div>
             </header>
 
@@ -307,11 +320,14 @@
               <div id="previewSkills" class="skills-cluster">
                 <span class="tech-pill">Java</span>
                 <span class="tech-pill">Python</span>
+                <span class="tech-pill">C++</span>
                 <span class="tech-pill">HTML5</span>
                 <span class="tech-pill">CSS3</span>
                 <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">TypeScript</span>
                 <span class="tech-pill">Git</span>
                 <span class="tech-pill">SQL</span>
+                <span class="tech-pill">Docker</span>
               </div>
             </div>
 
@@ -323,10 +339,10 @@
                 <h3 class="section-heading">Education & Academics</h3>
                 <div class="content-box">
                   <div class="box-top">
-                    <h4 id="previewEduDegree">Degree & Specialization</h4>
-                    <span class="sub-badge" id="previewEduYear">Graduation Year</span>
+                    <h4 id="previewEduDegree">B.Tech in Computer Engineering</h4>
+                    <span class="sub-badge" id="previewEduYear">Class of 2026 | CGPA: 8.8</span>
                   </div>
-                  <p class="box-sub" id="previewEduCollege">College or University Name</p>
+                  <p class="box-sub" id="previewEduCollege">Institute of Technology & Engineering</p>
                 </div>
               </div>
 
@@ -335,16 +351,15 @@
                 <h3 class="section-heading">Experience & Roles</h3>
                 <div class="content-box">
                   <div class="box-top">
-                    <h4 id="previewExpRole">Role or Internship</h4>
-                    <span class="sub-badge" id="previewExpOrg">Organization</span>
+                    <h4 id="previewExpRole">Software Engineering Intern</h4>
+                    <span class="sub-badge" id="previewExpOrg">Tech Innovations Lab</span>
                   </div>
-                  <p class="box-sub" id="previewExpDesc">Responsibilities and achievements will display here once filled in the editor.</p>
+                  <p class="box-sub" id="previewExpDesc">Engineered responsive dashboard components, optimized API latency by 25%, and integrated automated unit tests.</p>
                 </div>
               </div>
 
             </div>
 
-            <!-- Scroll Indicator to Page 2 -->
             <div class="scroll-down-hint">
               <span>Scroll down to inspect featured project media & live links</span>
               <div class="scroll-arrow">↓</div>
@@ -362,17 +377,28 @@
             <!-- Dynamic Media Projects -->
             <div class="page-block">
               <h3 class="section-heading">Featured Engineering Projects</h3>
-              <div class="projects-grid" id="previewProjectsList">
-                <!-- Dynamically populated in JavaScript -->
-              </div>
+              <div class="projects-grid" id="previewProjectsList"></div>
             </div>
 
-            <!-- Certifications -->
+            <!-- Enhanced Certifications with Document Proof -->
             <div class="page-block">
-              <h3 class="section-heading">Key Credential</h3>
-              <div class="cert-block">
-                <span class="cert-icon">🏅</span>
-                <span id="previewCert">Certification / Academic Award</span>
+              <h3 class="section-heading">Verified Credentials & Certifications</h3>
+              <div class="cert-proof-card" id="certPreviewCard">
+                <div class="cert-icon-col">
+                  <img id="certPreviewImg" src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=250&q=80" alt="Certificate Thumbnail" class="cert-thumb">
+                </div>
+                <div class="cert-body-col">
+                  <div class="cert-badge-row">
+                    <span class="verified-pill">✓ VERIFIED CREDENTIAL</span>
+                    <span class="cert-issuer-badge" id="previewCertIssuer">Meta / Coursera</span>
+                  </div>
+                  <h4 id="previewCert">Full-Stack Web Development Certified</h4>
+                  <p class="cert-desc-text">Validated technical proficiency, project requirements, and verified testing standards.</p>
+                  <div class="cert-action-row">
+                    <a id="previewCertUrl" href="https://coursera.org/verify" target="_blank" class="cert-link-btn">View Credential ↗</a>
+                    <button type="button" id="openCertModalBtn" class="cert-preview-btn">🔍 View Document</button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -383,7 +409,7 @@
                   <h4>Interested in collaborating?</h4>
                   <p>Open for internships, entry-level engineering roles, and open-source contributions.</p>
                 </div>
-                <a id="connectBtn" href="mailto:student@domain.com" class="connect-action">Get in Touch →</a>
+                <a id="connectBtn" href="mailto:jordan.lee@university.edu" class="connect-action">Get in Touch →</a>
               </div>
               <p class="copyright-note">Built with Portfolify • Open Engineering Standard</p>
             </footer>
@@ -398,9 +424,22 @@
 
   </div>
 
+  <!-- Document View Modal -->
+  <div id="docViewerModal" class="doc-modal-overlay">
+    <div class="doc-modal-content">
+      <div class="doc-modal-top">
+        <h4 id="docModalTitle">Certificate Document Preview</h4>
+        <button type="button" id="closeDocModalBtn" class="close-doc-btn">✕</button>
+      </div>
+      <div class="doc-modal-body">
+        <img id="docModalImg" src="" alt="Full Certificate Document">
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="copyToast" class="toast">Link copied to clipboard!</div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
