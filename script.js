@@ -1,5 +1,5 @@
 // ==========================================
-// PORTFOLIFY SMART PRESET SCRIPT (UPDATED)
+// PORTFOLIFY SMART STUDIO SCRIPT (THEMES FIXED)
 // ==========================================
 function initPortfolify() {
 
@@ -98,13 +98,13 @@ function initPortfolify() {
 
   let certificateDocSrc = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=700&q=80';
 
-  // 🔗 URL HASH se Data Read karne ka function (Page Load par)
+  // 🔗 URL HASH DECODER
   function loadDataFromUrl() {
     const hash = window.location.hash;
     if (hash && hash.includes('#data=')) {
       try {
         const base64Data = hash.split('#data=')[1];
-        const jsonString = decodeURIComponent(escape(atob(base64Data)));
+        const jsonString = decodeURIComponent(atob(base64Data).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         const data = JSON.parse(jsonString);
 
         if (nameInput) nameInput.value = data.name || '';
@@ -129,29 +129,30 @@ function initPortfolify() {
     }
   }
 
-  // ⚡ SMART PRESETS (Fresher vs Senior)
+  // ⚡ SMART PRESETS (AVCOE & ML Profiles)
   if (fresherPresetBtn) {
     fresherPresetBtn.addEventListener('click', () => {
-      if (roleInput) roleInput.value = 'Computer Science Student & Tech Explorer';
-      if (bioInput) bioInput.value = 'First-year engineering student eager to learn programming, solve logical puzzles, and build simple web apps.';
+      if (nameInput) nameInput.value = 'Karan Vasaikar';
+      if (roleInput) roleInput.value = '2nd-Year Automation & Robotics Student';
+      if (bioInput) bioInput.value = 'Passionate engineering student at AVCOE focusing on industrial automation, PLC programming, and web applications.';
       if (statProjectsInput) statProjectsInput.value = '3+';
       if (statCommitsInput) statCommitsInput.value = '50+';
       if (statProblemsInput) statProblemsInput.value = '40+';
-      if (skillsInput) skillsInput.value = 'C, C++, Python, HTML5, CSS3';
-      if (expRoleInput) expRoleInput.value = 'Coding Club Member';
-      if (expOrgInput) expOrgInput.value = 'College Technical Society';
-      if (expDescInput) expDescInput.value = 'Participated in coding bootcamps and collaborated on group mini-projects.';
-      if (certInput) certInput.value = 'Python Programming Fundamentals';
-      if (certIssuerInput) certIssuerInput.value = 'Coursera';
+      if (skillsInput) skillsInput.value = 'Python, Siemens PLC, Allen-Bradley PLC, HTML5, CSS3, JavaScript, Git';
+      if (expRoleInput) expRoleInput.value = 'Automation Trainee';
+      if (expOrgInput) expOrgInput.value = 'Siemens & Allen-Bradley Workshop';
+      if (expDescInput) expDescInput.value = 'Completed hands-on industrial automation training and PLC ladder logic programming.';
+      if (certInput) certInput.value = 'Industrial Automation & PLC Certification';
+      if (certIssuerInput) certIssuerInput.value = 'Siemens & Allen-Bradley';
 
       projects = [
         {
           id: 1,
-          title: 'Student Task Manager',
-          desc: 'Simple web app for tracking daily college assignments and exam dates.',
-          tech: 'HTML5, CSS3, JavaScript',
-          demoUrl: 'https://example.com/demo',
-          githubUrl: 'https://github.com/example/tasks',
+          title: 'Portfolify - Developer Portfolio',
+          desc: 'Built a custom responsive portfolio generator with local storage and shareable URL hashing.',
+          tech: 'JavaScript, HTML5, CSS3',
+          demoUrl: 'https://vasaikarkaran-dot.github.io/portfolify-dev.netlify.app/',
+          githubUrl: 'https://github.com/vasaikarkaran-dot/portfolify-dev.netlify.app',
           image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
         }
       ];
@@ -159,40 +160,33 @@ function initPortfolify() {
       renderPreviewProjects();
       document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderSkills();
+      updateProgress();
     });
   }
 
   if (seniorPresetBtn) {
     seniorPresetBtn.addEventListener('click', () => {
-      if (roleInput) roleInput.value = 'Final Year CSE Student & Full-Stack Developer';
-      if (bioInput) bioInput.value = 'Engineering senior experienced in full-stack web applications, cloud deployments, and collaborative hackathons.';
-      if (statProjectsInput) statProjectsInput.value = '12+';
-      if (statCommitsInput) statCommitsInput.value = '450+';
-      if (statProblemsInput) statProblemsInput.value = '250+';
-      if (skillsInput) skillsInput.value = 'Java, Python, React, Node.js, SQL, Docker, Git';
-      if (expRoleInput) expRoleInput.value = 'Software Engineering Intern';
-      if (expOrgInput) expOrgInput.value = 'Enterprise Software Labs';
-      if (expDescInput) expDescInput.value = 'Engineered microservice endpoints, reduced API latency by 25%, and instituted automated tests.';
-      if (certInput) certInput.value = 'Full-Stack Cloud Architecture Certified';
-      if (certIssuerInput) certIssuerInput.value = 'Meta / Coursera';
+      if (nameInput) nameInput.value = 'Karan Vasaikar';
+      if (roleInput) roleInput.value = 'Machine Learning & Mechatronics Explorer';
+      if (bioInput) bioInput.value = 'Engineering student skilled in machine learning models, predictive data pipelines, and automation systems.';
+      if (statProjectsInput) statProjectsInput.value = '5+';
+      if (statCommitsInput) statCommitsInput.value = '90+';
+      if (statProblemsInput) statProblemsInput.value = '75+';
+      if (skillsInput) skillsInput.value = 'Python, Machine Learning, Scikit-Learn, Pandas, NumPy, VJ Tech Academy';
+      if (expRoleInput) expRoleInput.value = 'ML Certification Trainee';
+      if (expOrgInput) expOrgInput.value = 'VJ Tech Academy';
+      if (expDescInput) expDescInput.value = 'Successfully completed machine learning certification covering data analysis and modeling.';
+      if (certInput) certInput.value = 'Machine Learning Practitioner';
+      if (certIssuerInput) certIssuerInput.value = 'VJ Tech Academy';
 
       projects = [
         {
           id: 1,
-          title: 'Cloud Document Manager',
-          desc: 'Scalable web service providing real-time text synchronization and encrypted cloud storage.',
-          tech: 'TypeScript, React, Node.js, WebSockets',
-          demoUrl: 'https://example.com/demo',
-          githubUrl: 'https://github.com/example/cloud-docs',
-          image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
-        },
-        {
-          id: 2,
-          title: 'Autonomous Campus Transit Bot',
-          desc: 'Pathfinding simulation engine incorporating Dijkstra and A* algorithms with analytics.',
-          tech: 'Java, JavaFX, Algorithms',
-          demoUrl: 'https://example.com/live',
-          githubUrl: 'https://github.com/example/transit-bot',
+          title: 'Predictive Data Analysis Model',
+          desc: 'Supervised learning pipeline built for data processing and automated classification.',
+          tech: 'Python, Pandas, Scikit-Learn',
+          demoUrl: '',
+          githubUrl: 'https://github.com/vasaikarkaran-dot',
           image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80'
         }
       ];
@@ -200,11 +194,21 @@ function initPortfolify() {
       renderPreviewProjects();
       document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderSkills();
+      updateProgress();
     });
   }
 
-  // Theme Switcher
-  const allThemes = ['theme-liquid-light', 'theme-vercel', 'theme-supabase', 'theme-linear', 'theme-cyber'];
+  // 🎨 EXPANDED DEVELOPER THEMES SWITCHER
+  const allThemes = [
+    'theme-liquid-light', 
+    'theme-vercel', 
+    'theme-supabase', 
+    'theme-linear', 
+    'theme-cyber',
+    'theme-github-dark',
+    'theme-dracula',
+    'theme-nord'
+  ];
 
   function switchTheme(newTheme) {
     allThemes.forEach(cls => {
@@ -223,6 +227,7 @@ function initPortfolify() {
   }
 
   if (themeSelect) {
+    // Ensure new themes are supported in select options dynamically if missing
     ['change', 'input'].forEach(evt => {
       themeSelect.addEventListener(evt, (e) => switchTheme(e.target.value));
     });
@@ -251,21 +256,12 @@ function initPortfolify() {
   let projects = [
     {
       id: 1,
-      title: 'Cloud Document Manager',
-      desc: 'Scalable web service providing real-time text synchronization, encrypted cloud storage, and team permission controls.',
-      tech: 'TypeScript, React, Node.js, WebSockets',
-      demoUrl: 'https://example.com/demo',
-      githubUrl: 'https://github.com/example/cloud-docs',
+      title: 'Portfolify - Developer Portfolio',
+      desc: 'Built a responsive portfolio platform for engineering students with instant HTML export and shareable links.',
+      tech: 'JavaScript, HTML5, CSS3',
+      demoUrl: 'https://vasaikarkaran-dot.github.io/portfolify-dev.netlify.app/',
+      githubUrl: 'https://github.com/vasaikarkaran-dot/portfolify-dev.netlify.app',
       image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
-    },
-    {
-      id: 2,
-      title: 'Autonomous Campus Transit Bot',
-      desc: 'Pathfinding simulation engine incorporating Dijkstra and A* path algorithms with interactive graphical analytics.',
-      tech: 'Java, JavaFX, Data Structures, OOP',
-      demoUrl: 'https://example.com/live',
-      githubUrl: 'https://github.com/example/transit-bot',
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80'
     }
   ];
 
@@ -285,7 +281,7 @@ function initPortfolify() {
         </div>
         <div class="form-group">
           <label>Project Title</label>
-          <input type="text" class="proj-title" value="${proj.title}" placeholder="e.g. Distributed Task Scheduler">
+          <input type="text" class="proj-title" value="${proj.title || ''}" placeholder="e.g. Industrial Automation System">
         </div>
         <div class="form-group">
           <label>Project Screenshot / Image</label>
@@ -293,7 +289,7 @@ function initPortfolify() {
         </div>
         <div class="form-group">
           <label>Summary</label>
-          <textarea rows="2" class="proj-desc" placeholder="What does it solve?">${proj.desc}</textarea>
+          <textarea rows="2" class="proj-desc" placeholder="What does it solve?">${proj.desc || ''}</textarea>
         </div>
         <div class="form-row">
           <div class="form-group half">
@@ -307,7 +303,7 @@ function initPortfolify() {
         </div>
         <div class="form-group">
           <label>Tech Stack Tags (Comma-separated)</label>
-          <input type="text" class="proj-tech" value="${proj.tech}" placeholder="e.g. Java, Spring Boot, PostgreSQL">
+          <input type="text" class="proj-tech" value="${proj.tech || ''}" placeholder="e.g. Python, Siemens PLC, Git">
         </div>
       `;
 
@@ -383,7 +379,7 @@ function initPortfolify() {
     });
   }
 
-  // Certificate Modal
+  // Certificate Modal & Upload Fix
   if (certInput && previewCert) certInput.addEventListener('input', () => { previewCert.textContent = certInput.value.trim() || 'Certificate / Honor Title'; updateProgress(); });
   if (certIssuerInput && previewCertIssuer) certIssuerInput.addEventListener('input', () => { previewCertIssuer.textContent = certIssuerInput.value.trim() || 'Issuing Authority'; });
   if (certUrlInput && previewCertUrl) certUrlInput.addEventListener('input', () => { previewCertUrl.href = certUrlInput.value.trim() || '#'; });
@@ -416,16 +412,6 @@ function initPortfolify() {
     docViewerModal.addEventListener('click', (e) => { if (e.target === docViewerModal) docViewerModal.classList.remove('active'); });
   }
 
-  // Live Bindings
-  function toTitleCase(str) { return str.replace(/\b\w/g, char => char.toUpperCase()); }
-  document.querySelectorAll('[data-capitalize="words"]').forEach(input => {
-    input.addEventListener('input', () => {
-      const cursor = input.selectionStart;
-      input.value = toTitleCase(input.value);
-      input.setSelectionRange(cursor, cursor);
-    });
-  });
-
   const trackedInputs = [nameInput, roleInput, bioInput, emailInput, skillsInput, eduDegreeInput, eduCollegeInput, expRoleInput, certInput].filter(Boolean);
 
   function updateProgress() {
@@ -443,7 +429,7 @@ function initPortfolify() {
 
   if (nameInput && previewName && previewUrl) {
     nameInput.addEventListener('input', () => {
-      const val = nameInput.value.trim() || 'Jordan Lee';
+      const val = nameInput.value.trim() || 'Karan Vasaikar';
       previewName.textContent = val;
       if (previewBrandName) previewBrandName.textContent = val;
       const slug = val.toLowerCase().replace(/[^a-z0-9]/g, '-');
@@ -454,7 +440,7 @@ function initPortfolify() {
 
   if (roleInput && previewRole) {
     roleInput.addEventListener('input', () => {
-      const val = roleInput.value.trim() || 'Student Developer';
+      const val = roleInput.value.trim() || 'Automation & Robotics Student';
       previewRole.textContent = val;
       if (previewBrandRole) previewBrandRole.textContent = val;
       updateProgress();
@@ -462,9 +448,9 @@ function initPortfolify() {
   }
 
   if (bioInput && previewBio) bioInput.addEventListener('input', () => { previewBio.textContent = bioInput.value.trim() || 'Short bio...'; updateProgress(); });
-  if (statProjectsInput && previewStatProjects) statProjectsInput.addEventListener('input', () => { const v = statProjectsInput.value.trim() || '12+'; previewStatProjects.textContent = v; if (previewFloatProjects) previewFloatProjects.textContent = v; });
-  if (statCommitsInput && previewStatCommits) statCommitsInput.addEventListener('input', () => { previewStatCommits.textContent = statCommitsInput.value.trim() || '380+'; });
-  if (statProblemsInput && previewStatProblems) statProblemsInput.addEventListener('input', () => { previewStatProblems.textContent = statProblemsInput.value.trim() || '190+'; });
+  if (statProjectsInput && previewStatProjects) statProjectsInput.addEventListener('input', () => { const v = statProjectsInput.value.trim() || '3+'; previewStatProjects.textContent = v; if (previewFloatProjects) previewFloatProjects.textContent = v; });
+  if (statCommitsInput && previewStatCommits) statCommitsInput.addEventListener('input', () => { previewStatCommits.textContent = statCommitsInput.value.trim() || '50+'; });
+  if (statProblemsInput && previewStatProblems) statProblemsInput.addEventListener('input', () => { previewStatProblems.textContent = statProblemsInput.value.trim() || '40+'; });
 
   if (emailInput && previewEmail && connectBtn) {
     emailInput.addEventListener('input', () => {
@@ -515,50 +501,54 @@ function initPortfolify() {
     });
   }
 
-  // 🔗 SHAREABLE LINK GENERATOR (Data Encoding)
+  // 🔗 SHAREABLE LINK GENERATOR & CHROME OPEN FIX
   if (browserAddressBar && copyToast && previewUrl) {
     browserAddressBar.addEventListener('click', () => {
-      const portfolioData = {
-        name: nameInput ? nameInput.value : '',
-        role: roleInput ? roleInput.value : '',
-        bio: bioInput ? bioInput.value : '',
-        email: emailInput ? emailInput.value : '',
-        phone: phoneInput ? phoneInput.value : '',
-        linkedin: linkedinInput ? linkedinInput.value : '',
-        github: githubInput ? githubInput.value : '',
-        skills: skillsInput ? skillsInput.value : '',
-        projects: projects,
-        certTitle: certInput ? certInput.value : '',
-        certIssuer: certIssuerInput ? certIssuerInput.value : ''
-      };
+      try {
+        const portfolioData = {
+          name: nameInput ? nameInput.value : '',
+          role: roleInput ? roleInput.value : '',
+          bio: bioInput ? bioInput.value : '',
+          email: emailInput ? emailInput.value : '',
+          phone: phoneInput ? phoneInput.value : '',
+          linkedin: linkedinInput ? linkedinInput.value : '',
+          github: githubInput ? githubInput.value : '',
+          skills: skillsInput ? skillsInput.value : '',
+          projects: projects,
+          certTitle: certInput ? certInput.value : '',
+          certIssuer: certIssuerInput ? certIssuerInput.value : ''
+        };
 
-      const jsonString = JSON.stringify(portfolioData);
-      const base64Data = btoa(unescape(encodeURIComponent(jsonString)));
-      const currentBaseUrl = window.location.href.split('#')[0];
-      const shareableLink = `${currentBaseUrl}#data=${base64Data}`;
+        const jsonString = JSON.stringify(portfolioData);
+        const base64Data = btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
+        const currentBaseUrl = window.location.href.split('#')[0];
+        const shareableLink = `${currentBaseUrl}#data=${base64Data}`;
 
-      previewUrl.textContent = shareableLink;
+        previewUrl.textContent = shareableLink;
 
-      navigator.clipboard.writeText(shareableLink).then(() => {
-        copyToast.textContent = 'Shareable link copied to clipboard!';
-        copyToast.classList.add('show');
-        setTimeout(() => copyToast.classList.remove('show'), 2000);
-      });
+        navigator.clipboard.writeText(shareableLink).then(() => {
+          copyToast.textContent = 'Shareable link copied to clipboard!';
+          copyToast.classList.add('show');
+          setTimeout(() => copyToast.classList.remove('show'), 2000);
+        });
+      } catch (err) {
+        console.error('Error generating link:', err);
+      }
     });
   }
 
   // Reset Demo / Sample
   if (demoBtn) {
     demoBtn.addEventListener('click', () => {
-      if (nameInput) nameInput.value = 'Jordan Lee';
-      if (roleInput) roleInput.value = 'Computer Science Student & Full-Stack Developer';
-      if (bioInput) bioInput.value = 'Undergraduate computer science student passionate about distributed systems and modern web architecture.';
-      if (statProjectsInput) statProjectsInput.value = '12+';
-      if (statCommitsInput) statCommitsInput.value = '380+';
-      if (statProblemsInput) statProblemsInput.value = '190+';
-      if (emailInput) emailInput.value = 'jordan.lee@university.edu';
+      if (nameInput) nameInput.value = 'Karan Vasaikar';
+      if (roleInput) roleInput.value = 'Automation & Robotics Student';
+      if (bioInput) bioInput.value = '2nd year engineering student at AVCOE passionate about PLC systems and software tools.';
+      if (statProjectsInput) statProjectsInput.value = '3+';
+      if (statCommitsInput) statCommitsInput.value = '50+';
+      if (statProblemsInput) statProblemsInput.value = '40+';
+      if (emailInput) emailInput.value = 'karan@domain.com';
       if (phoneInput) phoneInput.value = '+91 98765 43210';
-      if (skillsInput) skillsInput.value = 'Java, Python, C++, HTML5, CSS3, JavaScript, TypeScript, Git, SQL, Docker';
+      if (skillsInput) skillsInput.value = 'Python, Siemens PLC, Allen-Bradley PLC, C++, HTML5, CSS3';
       document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
       renderSkills();
     });
@@ -584,7 +574,7 @@ function initPortfolify() {
   renderPreviewProjects();
   renderSkills();
   
-  // Page load hote hi agar URL me data hai toh load karo
+  // Load data from URL hash if present
   loadDataFromUrl();
   updateProgress();
 }
