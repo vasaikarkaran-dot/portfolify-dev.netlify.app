@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Portfolio Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- LEFT PANEL: FORM EDITOR -->
+    <aside class="editor-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Portfolio Studio</h2>
+          <p class="panel-subtitle">Create a complete multi-section developer showcase</p>
+        </div>
+        <button type="button" id="demoBtn" class="pill-btn secondary">⚡ Fill Full Demo</button>
+      </div>
+
+      <!-- Completeness Meter -->
+      <div class="meter-box">
+        <div class="meter-meta">
+          <span>Portfolio Strength</span>
+          <span id="meterPercent">0%</span>
+        </div>
+        <div class="meter-track">
+          <div id="meterFill" class="meter-fill"></div>
+        </div>
+      </div>
+
+      <form id="portfolioForm">
+        
+        <!-- Theme & Profile Picture -->
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Curated Elite Themes</label>
+            <select id="themeSelect">
+              <optgroup label="🌌 Dark & Modern Tech">
+                <option value="theme-vercel">▲ Vercel Obsidian (Default)</option>
+                <option value="theme-supabase">⚡ Supabase Emerald</option>
+                <option value="theme-linear">🔮 Linear Dark Violet</option>
+                <option value="theme-github-dark">🐙 GitHub Pro Dark</option>
+                <option value="theme-dracula">🧛 Dracula Official</option>
+                <option value="theme-catppuccin">☕ Catppuccin Mocha</option>
+                <option value="theme-cyber">🌐 Cyberpunk Neon</option>
+                <option value="theme-tailwind">🌊 Tailwind Teal</option>
+              </optgroup>
+              <optgroup label="💼 Clean & Executive">
+                <option value="theme-stripe">💳 Stripe Executive Light</option>
+                <option value="theme-raycast">⌘ Raycast Minimalist</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label>Profile Picture</label>
+            <input type="file" id="photoInput" accept="image/*">
+          </div>
+        </div>
+
+        <!-- Section 1: Hero & Identity -->
+        <div class="section-badge">📄 Page 1: Hero, Stats & Academics</div>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="nameInput" placeholder="e.g. Karan Vasaikar" data-capitalize="words">
+        </div>
+
+        <div class="form-group">
+          <label>Headline / Role</label>
+          <input type="text" id="roleInput" placeholder="e.g. Computer Engineering Student & Full-Stack Developer">
+        </div>
+
+        <div class="form-group">
+          <label>About Me (Bio)</label>
+          <textarea id="bioInput" rows="3" placeholder="Tell recruiters about your engineering journey, software passions, and goals..."></textarea>
+        </div>
+
+        <!-- Quick Numerical Highlights -->
+        <div class="form-row">
+          <div class="form-group third">
+            <label>Completed Projects</label>
+            <input type="text" id="statProjectsInput" placeholder="e.g. 15+">
+          </div>
+          <div class="form-group third">
+            <label>GitHub Commits</label>
+            <input type="text" id="statCommitsInput" placeholder="e.g. 450+">
+          </div>
+          <div class="form-group third">
+            <label>LeetCode Solved</label>
+            <input type="text" id="statProblemsInput" placeholder="e.g. 200+">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Email Address</label>
+            <input type="email" id="emailInput" placeholder="student@example.com">
+          </div>
+          <div class="form-group half">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" id="phoneInput" placeholder="+91 9876543210">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label>LinkedIn URL</label>
+            <input type="url" id="linkedinInput" placeholder="https://linkedin.com/in/username">
+          </div>
+          <div class="form-group half">
+            <label>GitHub URL</label>
+            <input type="url" id="githubInput" placeholder="https://github.com/username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Technical Stack (Comma-separated)</label>
+          <input type="text" id="skillsInput" placeholder="e.g. Java, Python, HTML5, CSS3, JavaScript, Git, SQL, Docker" data-capitalize="words">
+        </div>
+
+        <!-- Education -->
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Degree & Major</label>
+            <input type="text" id="eduDegreeInput" placeholder="e.g. B.Tech Computer Engineering" data-capitalize="words">
+          </div>
+          <div class="form-group half">
+            <label>Passing Year / CGPA</label>
+            <input type="text" id="eduYearInput" placeholder="e.g. 2026 | CGPA: 8.9">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>College / University</label>
+          <input type="text" id="eduCollegeInput" placeholder="e.g. Department of Computer Engineering" data-capitalize="words">
+        </div>
+
+        <!-- Experience / Hackathon -->
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Experience / Hackathon Title</label>
+            <input type="text" id="expRoleInput" placeholder="e.g. Web Development Intern / Hackathon Finalist" data-capitalize="words">
+          </div>
+          <div class="form-group half">
+            <label>Organization / Team</label>
+            <input type="text" id="expOrgInput" placeholder="e.g. Tech Solutions Inc. / Smart India Hackathon" data-capitalize="words">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Experience Summary</label>
+          <textarea id="expDescInput" rows="2" placeholder="What core contributions did you make?"></textarea>
+        </div>
+
+        <!-- Section 2: Projects with Screenshot & Demo Links -->
+        <div class="section-badge">📁 Page 2: Projects (With Screenshots & Links)</div>
+
+        <div id="projectsFormList">
+          <!-- Dynamically populated in JavaScript -->
+        </div>
+
+        <button type="button" id="addProjectBtn" class="add-proj-btn">+ Add Another Project</button>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label>Key Certification / Award</label>
+          <input type="text" id="certInput" placeholder="e.g. Java Full Stack Certified - HackerRank / Oracle" data-capitalize="words">
+        </div>
+
+        <!-- Export Buttons -->
+        <div class="action-footer">
+          <button type="button" onclick="window.print()" class="btn btn-secondary">📄 Export Multi-Page PDF</button>
+          <button type="button" id="downloadHtmlBtn" class="btn btn-primary">💻 Download Code File</button>
+        </div>
+
+      </form>
+    </aside>
+
+    <!-- RIGHT PANEL: DESKTOP BROWSER PREVIEW (2-PAGE SCROLL) -->
+    <main class="preview-panel">
+      
+      <div class="browser-window">
+        
+        <!-- Browser Bar -->
+        <div class="browser-bar">
+          <div class="browser-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="browser-address" id="browserAddressBar" title="Click to copy link">
+            <span class="lock-icon">🔒</span>
+            <span id="previewUrl">https://portfolio.dev/karan-vasaikar</span>
+            <span class="copy-badge">Copy</span>
+          </div>
+          <div class="page-nav-pills">
+            <a href="#pageHero" class="page-pill">Page 1</a>
+            <a href="#pageProjects" class="page-pill">Page 2</a>
+          </div>
+        </div>
+
+        <!-- The Actual Scrollable Portfolio Website -->
+        <div class="browser-content theme-vercel" id="portfolioWebsite">
+          
+          <!-- ================= PAGE 1: HERO, METRICS & ACADEMICS ================= -->
+          <section class="portfolio-page" id="pageHero">
+            
+            <header class="portfolio-hero">
+              <div class="hero-identity">
+                <div class="photo-wrapper">
+                  <img id="previewPhoto" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Profile Photo">
+                  <span class="status-indicator" title="Open to opportunities"></span>
+                </div>
+                <div class="hero-text">
+                  <div class="badge-role" id="previewRole">Computer Engineering Student</div>
+                  <h1 id="previewName">Karan Vasaikar</h1>
+                  <p id="previewBio">Passionate developer focused on building reliable, clean software systems and responsive web applications with modern architecture.</p>
+                </div>
+              </div>
+
+              <!-- Quick Numerical Stat Cards -->
+              <div class="stats-strip">
+                <div class="stat-card">
+                  <span class="stat-number" id="previewStatProjects">15+</span>
+                  <span class="stat-label">Projects Built</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-number" id="previewStatCommits">450+</span>
+                  <span class="stat-label">GitHub Commits</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-number" id="previewStatProblems">200+</span>
+                  <span class="stat-label">Problems Solved</span>
+                </div>
+              </div>
+
+              <!-- Social Links Strip -->
+              <div class="hero-links">
+                <a id="previewEmail" href="mailto:karan@example.com">📧 karan@example.com</a>
+                <span id="previewPhone">📞 +91 98765 43210</span>
+                <a id="previewLinkedin" href="#" target="_blank">LinkedIn ↗</a>
+                <a id="previewGithub" href="#" target="_blank">GitHub ↗</a>
+              </div>
+            </header>
+
+            <!-- Technical Arsenal -->
+            <div class="page-block">
+              <h3 class="section-heading">Core Technical Arsenal</h3>
+              <div id="previewSkills" class="skills-cluster">
+                <span class="tech-pill">Java</span>
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">HTML5</span>
+                <span class="tech-pill">CSS3</span>
+                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">Git</span>
+                <span class="tech-pill">SQL</span>
+              </div>
+            </div>
+
+            <!-- Two-Column Block: Education & Experience -->
+            <div class="two-col-grid">
+              
+              <!-- Education -->
+              <div class="page-block">
+                <h3 class="section-heading">Education & Academics</h3>
+                <div class="content-box">
+                  <div class="box-top">
+                    <h4 id="previewEduDegree">B.Tech in Computer Engineering</h4>
+                    <span class="sub-badge" id="previewEduYear">2026 | CGPA: 8.9</span>
+                  </div>
+                  <p class="box-sub" id="previewEduCollege">Department of Computer Engineering</p>
+                </div>
+              </div>
+
+              <!-- Experience / Hackathon -->
+              <div class="page-block">
+                <h3 class="section-heading">Experience & Roles</h3>
+                <div class="content-box">
+                  <div class="box-top">
+                    <h4 id="previewExpRole">Web Engineering Intern</h4>
+                    <span class="sub-badge" id="previewExpOrg">Tech Solutions Inc.</span>
+                  </div>
+                  <p class="box-sub" id="previewExpDesc">Engineered high-performance user interfaces and responsive web layouts.</p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Scroll Indicator to Page 2 -->
+            <div class="scroll-down-hint">
+              <span>Scroll down to inspect full project media & demos</span>
+              <div class="scroll-arrow">↓</div>
+            </div>
+
+          </section>
+
+          <!-- ================= PAGE 2: MEDIA PROJECTS & BANNER ================= -->
+          <section class="portfolio-page page-two" id="pageProjects">
+            
+            <div class="page-divider">
+              <span class="divider-label">Page 02 • Projects & Production Work</span>
+            </div>
+
+            <!-- Dynamic Media Projects -->
+            <div class="page-block">
+              <h3 class="section-heading">Featured Engineering Projects</h3>
+              <div class="projects-grid" id="previewProjectsList">
+                <!-- Dynamically populated in JavaScript -->
+              </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="page-block">
+              <h3 class="section-heading">Key Credential</h3>
+              <div class="cert-block">
+                <span class="cert-icon">🏅</span>
+                <span id="previewCert">Java Full Stack Certified - HackerRank / Oracle</span>
+              </div>
+            </div>
+
+            <!-- Connect Footer Banner -->
+            <footer class="portfolio-footer">
+              <div class="footer-banner">
+                <div>
+                  <h4>Interested in collaborating?</h4>
+                  <p>Open for full-time roles, internships, and engineering discussions.</p>
+                </div>
+                <a id="connectBtn" href="mailto:karan@example.com" class="connect-action">Get in Touch →</a>
+              </div>
+              <p class="copyright-note">Built with Portfolio Studio • Production Standard</p>
+            </footer>
+
+          </section>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="copyToast" class="toast">Link copied to clipboard!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
