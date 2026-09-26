@@ -3,25 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Developer Portfolio Studio</title>
+  <title>Portfolify • by Karan Vasaikar</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ================= 3D WELCOME POPUP MODAL ================= -->
+  <!-- ================= 3D INSPIRING WELCOME POPUP MODAL ================= -->
   <div id="welcomeModal" class="welcome-overlay">
     <div class="welcome-card-3d">
-      <div class="welcome-badge">PORTFOLIO STUDIO v2.0</div>
-      <h2>Craft Your Standout Developer Portfolio</h2>
-      <p>A zero-setup, multi-page portfolio generator tailored for engineering students. Fill out your details, attach project screenshots, switch themes, and export production-ready code.</p>
       
-      <div class="welcome-features">
-        <span>⚡ 10 Elite Themes</span>
-        <span>📁 Multi-Project Media</span>
-        <span>📄 Instant PDF & HTML</span>
+      <div class="glow-orb-backdrop"></div>
+
+      <div class="welcome-top-meta">
+        <span class="brand-pill">⚡ PORTFOLIFY</span>
+        <span class="version-pill">v2.0 PRO</span>
       </div>
 
-      <button type="button" id="startStudioBtn" class="welcome-btn">Launch Builder →</button>
+      <h1 class="welcome-headline">
+        Your Code Tells a Story.<br>
+        <span class="gradient-text">Make It Unforgettable.</span>
+      </h1>
+
+      <div class="creator-badge">
+        <span class="creator-label">Architected & Engineered by</span>
+        <span class="creator-name">Karan Vasaikar</span>
+      </div>
+
+      <!-- INSPIRING STUDENT MESSAGE -->
+      <div class="student-inspire-box">
+        <p class="inspire-quote">
+          "Every late-night bug you fixed, every hackathon prototype you built, and every line of code deserves more than a boring plain resume."
+        </p>
+        <p class="inspire-subtext">
+          Built for passionate engineering and computer science students. Turn your academic journey, coding stats, and project screenshots into a high-impact developer website that catches recruiters' attention in seconds.
+        </p>
+        
+        <div class="inspire-highlights">
+          <div class="highlight-chip"><span>🎯</span> 0% Fluff • 100% Proof</div>
+          <div class="highlight-chip"><span>📁</span> Live Media & Repos</div>
+          <div class="highlight-chip"><span>💼</span> Recruiter-Ready Flow</div>
+        </div>
+      </div>
+      
+      <div class="welcome-features">
+        <span>▲ 10 Iconic Themes</span>
+        <span>📱 Mobile Responsive</span>
+        <span>📄 Instant PDF & HTML Export</span>
+      </div>
+
+      <button type="button" id="startStudioBtn" class="welcome-btn">
+        <span>Launch Portfolify Now</span>
+        <span class="btn-arrow">→</span>
+      </button>
     </div>
   </div>
 
@@ -37,8 +70,8 @@
     <aside class="editor-panel" id="editorPanel">
       <div class="panel-header">
         <div>
-          <h2>Portfolio Studio</h2>
-          <p class="panel-subtitle">Create a complete multi-section developer showcase</p>
+          <h2>Portfolify</h2>
+          <p class="panel-subtitle">By Karan Vasaikar • Student Portfolio Generator</p>
         </div>
         <button type="button" id="demoBtn" class="pill-btn secondary">⚡ Sample Data</button>
       </div>
@@ -215,7 +248,7 @@
           </div>
           <div class="browser-address" id="browserAddressBar" title="Click to copy link">
             <span class="lock-icon">🔒</span>
-            <span id="previewUrl">https://portfolio.dev/your-name</span>
+            <span id="previewUrl">https://portfolify.me/your-name</span>
             <span class="copy-badge">Copy</span>
           </div>
           <div class="page-nav-pills">
@@ -352,7 +385,7 @@
                 </div>
                 <a id="connectBtn" href="mailto:student@domain.com" class="connect-action">Get in Touch →</a>
               </div>
-              <p class="copyright-note">Built with Portfolio Studio • Open Engineering Standard</p>
+              <p class="copyright-note">Built with Portfolify • Open Engineering Standard</p>
             </footer>
 
           </section>

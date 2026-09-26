@@ -297,7 +297,7 @@ nameInput.addEventListener('input', () => {
   const val = nameInput.value.trim() || 'Your Full Name';
   previewName.textContent = val;
   const slug = val.toLowerCase().replace(/[^a-z0-9]/g, '-');
-  previewUrl.textContent = `https://portfolio.dev/${slug}`;
+  previewUrl.textContent = `https://portfolify.me/${slug}`;
   updateProgress();
 });
 
