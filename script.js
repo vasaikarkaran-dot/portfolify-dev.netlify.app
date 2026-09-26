@@ -1,5 +1,5 @@
 // ==========================================
-// PORTFOLIFY SMART STUDIO SCRIPT (THEMES FIXED)
+// PORTFOLIFY SMART STUDIO SCRIPT (FINAL FIX)
 // ==========================================
 function initPortfolify() {
 
@@ -98,7 +98,7 @@ function initPortfolify() {
 
   let certificateDocSrc = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=700&q=80';
 
-  // 🔗 URL HASH DECODER
+  // 🔗 URL HASH DECODER & MODAL HIDE FIX
   function loadDataFromUrl() {
     const hash = window.location.hash;
     if (hash && hash.includes('#data=')) {
@@ -118,6 +118,11 @@ function initPortfolify() {
         if (data.projects) projects = data.projects;
         if (certInput) certInput.value = data.certTitle || '';
         if (certIssuerInput) certIssuerInput.value = data.certIssuer || '';
+
+        // Welcome modal hide karo taaki direct portfolio dikhe
+        if (welcomeModal) {
+          welcomeModal.classList.add('hidden');
+        }
 
         document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
         renderProjectForms();
@@ -198,7 +203,7 @@ function initPortfolify() {
     });
   }
 
-  // 🎨 EXPANDED DEVELOPER THEMES SWITCHER
+  // 🎨 THEMES SWITCHER
   const allThemes = [
     'theme-liquid-light', 
     'theme-vercel', 
@@ -227,7 +232,6 @@ function initPortfolify() {
   }
 
   if (themeSelect) {
-    // Ensure new themes are supported in select options dynamically if missing
     ['change', 'input'].forEach(evt => {
       themeSelect.addEventListener(evt, (e) => switchTheme(e.target.value));
     });
