@@ -1,5 +1,5 @@
 // ==========================================
-// PORTFOLIFY SMART STUDIO SCRIPT (FINAL FIX)
+// PORTFOLIFY SMART STUDIO SCRIPT (FINAL CLEAN & BLANK FIX)
 // ==========================================
 function initPortfolify() {
 
@@ -98,13 +98,26 @@ function initPortfolify() {
 
   let certificateDocSrc = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=700&q=80';
 
+  // 🔒 UTF-8 Safe Base64 Helpers
+  function utoa(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+      return String.fromCharCode('0x' + p1);
+    }));
+  }
+
+  function atou(str) {
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  }
+
   // 🔗 URL HASH DECODER & MODAL HIDE FIX
   function loadDataFromUrl() {
     const hash = window.location.hash;
     if (hash && hash.includes('#data=')) {
       try {
         const base64Data = hash.split('#data=')[1];
-        const jsonString = decodeURIComponent(atob(base64Data).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+        const jsonString = atou(base64Data);
         const data = JSON.parse(jsonString);
 
         if (nameInput) nameInput.value = data.name || '';
@@ -119,7 +132,6 @@ function initPortfolify() {
         if (certInput) certInput.value = data.certTitle || '';
         if (certIssuerInput) certIssuerInput.value = data.certIssuer || '';
 
-        // Welcome modal hide karo taaki direct portfolio dikhe
         if (welcomeModal) {
           welcomeModal.classList.add('hidden');
         }
@@ -128,10 +140,12 @@ function initPortfolify() {
         renderProjectForms();
         renderPreviewProjects();
         renderSkills();
+        return true;
       } catch (e) {
         console.error('Failed to load portfolio from URL data', e);
       }
     }
+    return false;
   }
 
   // ⚡ SMART PRESETS (AVCOE & ML Profiles)
@@ -256,15 +270,14 @@ function initPortfolify() {
     });
   }
 
-  // Projects State
   let projects = [
     {
       id: 1,
-      title: 'Portfolify - Developer Portfolio',
-      desc: 'Built a responsive portfolio platform for engineering students with instant HTML export and shareable links.',
-      tech: 'JavaScript, HTML5, CSS3',
-      demoUrl: 'https://vasaikarkaran-dot.github.io/portfolify-dev.netlify.app/',
-      githubUrl: 'https://github.com/vasaikarkaran-dot/portfolify-dev.netlify.app',
+      title: '',
+      desc: '',
+      tech: '',
+      demoUrl: '',
+      githubUrl: '',
       image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80'
     }
   ];
@@ -433,10 +446,10 @@ function initPortfolify() {
 
   if (nameInput && previewName && previewUrl) {
     nameInput.addEventListener('input', () => {
-      const val = nameInput.value.trim() || 'Karan Vasaikar';
+      const val = nameInput.value.trim() || 'Your Name';
       previewName.textContent = val;
       if (previewBrandName) previewBrandName.textContent = val;
-      const slug = val.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      const slug = val.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'portfolio';
       previewUrl.textContent = `https://portfolify.me/${slug}`;
       updateProgress();
     });
@@ -444,7 +457,7 @@ function initPortfolify() {
 
   if (roleInput && previewRole) {
     roleInput.addEventListener('input', () => {
-      const val = roleInput.value.trim() || 'Automation & Robotics Student';
+      const val = roleInput.value.trim() || 'Student Developer';
       previewRole.textContent = val;
       if (previewBrandRole) previewBrandRole.textContent = val;
       updateProgress();
@@ -452,9 +465,9 @@ function initPortfolify() {
   }
 
   if (bioInput && previewBio) bioInput.addEventListener('input', () => { previewBio.textContent = bioInput.value.trim() || 'Short bio...'; updateProgress(); });
-  if (statProjectsInput && previewStatProjects) statProjectsInput.addEventListener('input', () => { const v = statProjectsInput.value.trim() || '3+'; previewStatProjects.textContent = v; if (previewFloatProjects) previewFloatProjects.textContent = v; });
-  if (statCommitsInput && previewStatCommits) statCommitsInput.addEventListener('input', () => { previewStatCommits.textContent = statCommitsInput.value.trim() || '50+'; });
-  if (statProblemsInput && previewStatProblems) statProblemsInput.addEventListener('input', () => { previewStatProblems.textContent = statProblemsInput.value.trim() || '40+'; });
+  if (statProjectsInput && previewStatProjects) statProjectsInput.addEventListener('input', () => { const v = statProjectsInput.value.trim() || '0+'; previewStatProjects.textContent = v; if (previewFloatProjects) previewFloatProjects.textContent = v; });
+  if (statCommitsInput && previewStatCommits) statCommitsInput.addEventListener('input', () => { previewStatCommits.textContent = statCommitsInput.value.trim() || '0+'; });
+  if (statProblemsInput && previewStatProblems) statProblemsInput.addEventListener('input', () => { previewStatProblems.textContent = statProblemsInput.value.trim() || '0+'; });
 
   if (emailInput && previewEmail && connectBtn) {
     emailInput.addEventListener('input', () => {
@@ -505,7 +518,7 @@ function initPortfolify() {
     });
   }
 
-  // 🔗 SHAREABLE LINK GENERATOR & CHROME OPEN FIX
+  // 🔗 SHAREABLE LINK GENERATOR
   if (browserAddressBar && copyToast && previewUrl) {
     browserAddressBar.addEventListener('click', () => {
       try {
@@ -524,11 +537,12 @@ function initPortfolify() {
         };
 
         const jsonString = JSON.stringify(portfolioData);
-        const base64Data = btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
+        const base64Data = utoa(jsonString);
         const currentBaseUrl = window.location.href.split('#')[0];
         const shareableLink = `${currentBaseUrl}#data=${base64Data}`;
 
         previewUrl.textContent = shareableLink;
+        window.location.hash = `data=${base64Data}`;
 
         navigator.clipboard.writeText(shareableLink).then(() => {
           copyToast.textContent = 'Shareable link copied to clipboard!';
@@ -574,12 +588,18 @@ function initPortfolify() {
     });
   }
 
+  // Check if URL has hash data. If NOT, clear form fields so they are blank!
+  const hasLoadedFromUrl = loadDataFromUrl();
+  if (!hasLoadedFromUrl) {
+    document.querySelectorAll('input:not([type="file"]), textarea').forEach(el => {
+      el.value = '';
+    });
+    projects = [{ id: 1, title: '', desc: '', tech: '', demoUrl: '', githubUrl: '', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=700&q=80' }];
+  }
+
   renderProjectForms();
   renderPreviewProjects();
   renderSkills();
-  
-  // Load data from URL hash if present
-  loadDataFromUrl();
   updateProgress();
 }
 
