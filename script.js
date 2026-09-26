@@ -1,5 +1,5 @@
 // ==========================================
-// PORTFOLIFY SMART PRESET SCRIPT
+// PORTFOLIFY SMART PRESET SCRIPT (UPDATED)
 // ==========================================
 function initPortfolify() {
 
@@ -97,6 +97,37 @@ function initPortfolify() {
   const meterPercent = document.getElementById('meterPercent');
 
   let certificateDocSrc = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=700&q=80';
+
+  // 🔗 URL HASH se Data Read karne ka function (Page Load par)
+  function loadDataFromUrl() {
+    const hash = window.location.hash;
+    if (hash && hash.includes('#data=')) {
+      try {
+        const base64Data = hash.split('#data=')[1];
+        const jsonString = decodeURIComponent(escape(atob(base64Data)));
+        const data = JSON.parse(jsonString);
+
+        if (nameInput) nameInput.value = data.name || '';
+        if (roleInput) roleInput.value = data.role || '';
+        if (bioInput) bioInput.value = data.bio || '';
+        if (emailInput) emailInput.value = data.email || '';
+        if (phoneInput) phoneInput.value = data.phone || '';
+        if (linkedinInput) linkedinInput.value = data.linkedin || '';
+        if (githubInput) githubInput.value = data.github || '';
+        if (skillsInput) skillsInput.value = data.skills || '';
+        if (data.projects) projects = data.projects;
+        if (certInput) certInput.value = data.certTitle || '';
+        if (certIssuerInput) certIssuerInput.value = data.certIssuer || '';
+
+        document.querySelectorAll('input, textarea').forEach(el => el.dispatchEvent(new Event('input')));
+        renderProjectForms();
+        renderPreviewProjects();
+        renderSkills();
+      } catch (e) {
+        console.error('Failed to load portfolio from URL data', e);
+      }
+    }
+  }
 
   // ⚡ SMART PRESETS (Fresher vs Senior)
   if (fresherPresetBtn) {
@@ -484,10 +515,32 @@ function initPortfolify() {
     });
   }
 
+  // 🔗 SHAREABLE LINK GENERATOR (Data Encoding)
   if (browserAddressBar && copyToast && previewUrl) {
     browserAddressBar.addEventListener('click', () => {
-      navigator.clipboard.writeText(previewUrl.textContent).then(() => {
-        copyToast.textContent = 'Link copied to clipboard!';
+      const portfolioData = {
+        name: nameInput ? nameInput.value : '',
+        role: roleInput ? roleInput.value : '',
+        bio: bioInput ? bioInput.value : '',
+        email: emailInput ? emailInput.value : '',
+        phone: phoneInput ? phoneInput.value : '',
+        linkedin: linkedinInput ? linkedinInput.value : '',
+        github: githubInput ? githubInput.value : '',
+        skills: skillsInput ? skillsInput.value : '',
+        projects: projects,
+        certTitle: certInput ? certInput.value : '',
+        certIssuer: certIssuerInput ? certIssuerInput.value : ''
+      };
+
+      const jsonString = JSON.stringify(portfolioData);
+      const base64Data = btoa(unescape(encodeURIComponent(jsonString)));
+      const currentBaseUrl = window.location.href.split('#')[0];
+      const shareableLink = `${currentBaseUrl}#data=${base64Data}`;
+
+      previewUrl.textContent = shareableLink;
+
+      navigator.clipboard.writeText(shareableLink).then(() => {
+        copyToast.textContent = 'Shareable link copied to clipboard!';
         copyToast.classList.add('show');
         setTimeout(() => copyToast.classList.remove('show'), 2000);
       });
@@ -530,6 +583,9 @@ function initPortfolify() {
   renderProjectForms();
   renderPreviewProjects();
   renderSkills();
+  
+  // Page load hote hi agar URL me data hai toh load karo
+  loadDataFromUrl();
   updateProgress();
 }
 
